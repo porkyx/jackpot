@@ -1,0 +1,46 @@
+package sqlite
+
+import (
+ "context"
+ "database/sql"
+ "time"
+ PRODUCT_TRACE_IMPORT
+)
+
+var profileAdmissionNow = time.Now
+var profileAdmissionRecord = producttrace.Record
+var profileAdmissionNames = map[string]bool{
+ "admit.preconditions":true,"admit.beginTx":true,"admit.historyAndReplayLookup":true,
+ "admit.revisionOrCollection":true,"admit.participantPrepare":true,"admit.participantExecLoop":true,"admit.participantClose":true,
+ "admit.operationInsert":true,"admit.inputMarshal":true,"admit.roundDecision":true,"admit.roundInsert":true,
+ "admit.candidatePrepare":true,"admit.candidateExecLoop":true,"admit.candidateClose":true,"admit.prizeInsertLoop":true,
+ "admit.dueClaim":true,"admit.attemptInsert":true,"admit.finalRoundRead":true,"admit.finalOperationRead":true,"admit.commit":true,
+ "admit.replayRoundRead":true,"admit.invalidPhaseLabel":true,
+}
+
+// One observer call per fixed block, never per participant/candidate/SQL row.
+// Only private diagnostics use this type; its labels are a closed static set.
+type profileAdmissionStages struct {ctx context.Context;name string;started time.Time;active bool;closed bool}
+func newProfileAdmissionStages(ctx context.Context) profileAdmissionStages {
+ stages:=profileAdmissionStages{ctx:ctx,active:producttrace.Active(ctx)}
+ stages.Next("admit.preconditions")
+ return stages
+}
+func (stages *profileAdmissionStages) Next(name string) {
+ if !stages.active || stages.closed {return}
+ if stages.name!="" {profileAdmissionRecord(stages.ctx,stages.name,stages.started)}
+ if !profileAdmissionNames[name] {name="admit.invalidPhaseLabel"}
+ stages.name=name
+ stages.started=profileAdmissionNow()
+}
+func (stages *profileAdmissionStages) Finish() {
+ if !stages.active || stages.closed {return}
+ stages.closed=true
+ if stages.name!="" {profileAdmissionRecord(stages.ctx,stages.name,stages.started)}
+}
+func profileAdmissionRollback(ctx context.Context,tx *sql.Tx) {
+ if !producttrace.Active(ctx) {_=tx.Rollback();return}
+ started:=profileAdmissionNow()
+ _=tx.Rollback()
+ profileAdmissionRecord(ctx,"admit.rollback",started)
+}

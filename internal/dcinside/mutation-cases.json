@@ -1,0 +1,191 @@
+[
+  {
+    "name": "page-cap",
+    "file": "internal/dcinside/collector.go",
+    "old": "maxPages        = 20",
+    "replacement": "maxPages        = 19",
+    "run": "TestCollectSequential"
+  },
+  {
+    "name": "pinned-total",
+    "file": "internal/dcinside/collector.go",
+    "old": "if wire.total != expected {",
+    "replacement": "if false {",
+    "run": "TestCollectPartial"
+  },
+  {
+    "name": "terminal-count",
+    "file": "internal/dcinside/collector.go",
+    "old": "if uniqueHumans != expected {",
+    "replacement": "if false {",
+    "run": "TestCollectSequential"
+  },
+  {
+    "name": "changed-duplicate",
+    "file": "internal/dcinside/collector.go",
+    "old": "if !reflect.DeepEqual(old, row) {",
+    "replacement": "if !reflect.DeepEqual(old, row) && false {",
+    "run": "TestCollectPartial"
+  },
+  {
+    "name": "delete-stat",
+    "file": "internal/dcinside/collector.go",
+    "old": "snapshot.DeletedComments++",
+    "replacement": "snapshot.DeletedComments += 2",
+    "run": "TestCollectActual|TestUnsupported"
+  },
+  {
+    "name": "unsupported-stat",
+    "file": "internal/dcinside/collector.go",
+    "old": "snapshot.UnsupportedComments++",
+    "replacement": "snapshot.UnsupportedComments += 2",
+    "run": "TestUnsupported"
+  },
+  {
+    "name": "complete-only",
+    "file": "internal/dcinside/collector.go",
+    "old": "snapshot.Complete = true",
+    "replacement": "snapshot.Complete = false",
+    "run": "TestCollectActual"
+  },
+  {
+    "name": "max-attempts",
+    "file": "internal/dcinside/collector.go",
+    "old": "if attempt == 3 {",
+    "replacement": "if attempt == 2 {",
+    "run": "TestRetriesOnly"
+  },
+  {
+    "name": "429-retry",
+    "file": "internal/dcinside/collector.go",
+    "old": "status == 429 ||",
+    "replacement": "false ||",
+    "run": "TestRetriesOnly"
+  },
+  {
+    "name": "500-retry",
+    "file": "internal/dcinside/collector.go",
+    "old": "status >= 500",
+    "replacement": "status > 500",
+    "run": "TestRetriesOnly"
+  },
+  {
+    "name": "page-byte-exact",
+    "file": "internal/dcinside/collector.go",
+    "old": "if len(data) > int(limit) {",
+    "replacement": "if len(data) >= int(limit) {",
+    "run": "TestDecodedPage"
+  },
+  {
+    "name": "cumulative-budget",
+    "file": "internal/dcinside/collector.go",
+    "old": "int64(maxTotalBytes) - *used",
+    "replacement": "int64(maxTotalBytes)",
+    "run": "TestDecodedPage"
+  },
+  {
+    "name": "response-close",
+    "file": "internal/dcinside/collector.go",
+    "old": "_ = response.Body.Close()",
+    "replacement": "_ = 0",
+    "run": "TestTransportMalformed"
+  },
+  {
+    "name": "timer-stop",
+    "file": "internal/dcinside/collector.go",
+    "old": "cancel(context.Canceled); timer.Stop(); <-done",
+    "replacement": "cancel(context.Canceled); <-done",
+    "run": "TestCollectActual"
+  },
+  {
+    "name": "deadline-cause",
+    "file": "internal/dcinside/collector.go",
+    "old": "cancel(context.DeadlineExceeded)",
+    "replacement": "cancel(context.Canceled)",
+    "run": "TestCancellationAndBoth"
+  },
+  {
+    "name": "url-userinfo",
+    "file": "internal/dcinside/url.go",
+    "old": "u.User != nil ||",
+    "replacement": "false ||",
+    "run": "TestNormalize"
+  },
+  {
+    "name": "url-port",
+    "file": "internal/dcinside/url.go",
+    "old": "u.Port() != \"\"",
+    "replacement": "false",
+    "run": "TestNormalize"
+  },
+  {
+    "name": "url-safe-number",
+    "file": "internal/dcinside/url.go",
+    "old": "n > 9007199254740991",
+    "replacement": "n > 9007199254740992",
+    "run": "TestNormalize"
+  },
+  {
+    "name": "url-control",
+    "file": "internal/dcinside/url.go",
+    "old": "strings.ContainsAny(raw, \"\\r\\n\\t\\\\\")",
+    "replacement": "false",
+    "run": "TestNormalize"
+  },
+  {
+    "name": "nickname-empty",
+    "file": "internal/dcinside/comments.go",
+    "old": "if result.comment.Nickname == \"\" {",
+    "replacement": "if false {",
+    "run": "TestStrictComment"
+  },
+  {
+    "name": "identity-empty",
+    "file": "internal/dcinside/comments.go",
+    "old": "if idMaterial == \"\" {",
+    "replacement": "if idMaterial == \"\" && false {",
+    "run": "TestCollectActual"
+  },
+  {
+    "name": "reply-depth",
+    "file": "internal/dcinside/comments.go",
+    "old": "depth > 1",
+    "replacement": "depth > 2",
+    "run": "TestStrictComment"
+  },
+  {
+    "name": "body-byte-exact",
+    "file": "internal/dcinside/comments.go",
+    "old": "if len(memo) > maxCommentBytes {",
+    "replacement": "if len(memo) >= maxCommentBytes {",
+    "run": "TestCommentBody"
+  },
+  {
+    "name": "media-scheme",
+    "file": "internal/dcinside/html.go",
+    "old": "u.Scheme != \"https\" ||",
+    "replacement": "false ||",
+    "run": "TestMediaURL"
+  },
+  {
+    "name": "script-content",
+    "file": "internal/dcinside/html.go",
+    "old": "if blocked == 0 {",
+    "replacement": "if true {",
+    "run": "TestCommentBody"
+  },
+  {
+    "name": "article-date-scope",
+    "file": "internal/dcinside/html.go",
+    "old": "page.article.PostedAt == nil && writerDepth != 0",
+    "replacement": "page.article.PostedAt == nil",
+    "run": "TestArticleParserDoes"
+  },
+  {
+    "name": "nested-title-depth",
+    "file": "internal/dcinside/html.go",
+    "old": "token.Data == captureTag && depth == captureDepth",
+    "replacement": "token.Data == captureTag && (depth == captureDepth || true)",
+    "run": "TestArticleParserDoes"
+  }
+]

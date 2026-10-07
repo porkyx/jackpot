@@ -1,0 +1,624 @@
+{
+  "protocolVersion": 1,
+  "backendSessionId": "session-fixture",
+  "occurredAt": "2026-10-06T05:00:00Z",
+  "ok": true,
+  "data": {
+    "backendNow": "2026-10-06T05:00:00Z",
+    "theme": "system",
+    "activeDraft": {
+      "backendSessionId": "session-fixture",
+      "draftId": "draft-fixture",
+      "revision": 9007199254740991,
+      "articleGeneration": 2,
+      "state": "ready",
+      "snapshot": {
+        "snapshotId": "snapshot-fixture",
+        "collectedAt": "2026-10-06T05:00:00Z",
+        "complete": true,
+        "pages": 20,
+        "acceptedComments": 100000,
+        "deletedComments": 0,
+        "unsupportedComments": 0
+      },
+      "collectionId": null
+    },
+    "pendingOperations": [
+      {
+        "operationId": "operation-001",
+        "kind": "CreateCollection",
+        "collectionId": "collection-001",
+        "roundId": "round-001",
+        "status": "pending",
+        "revision": 1
+      },
+      {
+        "operationId": "operation-002",
+        "kind": "CreateCollection",
+        "collectionId": "collection-002",
+        "roundId": "round-002",
+        "status": "pending",
+        "revision": 1
+      },
+      {
+        "operationId": "operation-003",
+        "kind": "CreateCollection",
+        "collectionId": "collection-003",
+        "roundId": "round-003",
+        "status": "pending",
+        "revision": 1
+      },
+      {
+        "operationId": "operation-004",
+        "kind": "CreateCollection",
+        "collectionId": "collection-004",
+        "roundId": "round-004",
+        "status": "pending",
+        "revision": 1
+      },
+      {
+        "operationId": "operation-005",
+        "kind": "CreateCollection",
+        "collectionId": "collection-005",
+        "roundId": "round-005",
+        "status": "pending",
+        "revision": 1
+      },
+      {
+        "operationId": "operation-006",
+        "kind": "CreateCollection",
+        "collectionId": "collection-006",
+        "roundId": "round-006",
+        "status": "pending",
+        "revision": 1
+      },
+      {
+        "operationId": "operation-007",
+        "kind": "CreateCollection",
+        "collectionId": "collection-007",
+        "roundId": "round-007",
+        "status": "pending",
+        "revision": 1
+      },
+      {
+        "operationId": "operation-008",
+        "kind": "CreateCollection",
+        "collectionId": "collection-008",
+        "roundId": "round-008",
+        "status": "pending",
+        "revision": 1
+      },
+      {
+        "operationId": "operation-009",
+        "kind": "CreateCollection",
+        "collectionId": "collection-009",
+        "roundId": "round-009",
+        "status": "pending",
+        "revision": 1
+      },
+      {
+        "operationId": "operation-010",
+        "kind": "CreateCollection",
+        "collectionId": "collection-010",
+        "roundId": "round-010",
+        "status": "pending",
+        "revision": 1
+      },
+      {
+        "operationId": "operation-011",
+        "kind": "CreateCollection",
+        "collectionId": "collection-011",
+        "roundId": "round-011",
+        "status": "pending",
+        "revision": 1
+      },
+      {
+        "operationId": "operation-012",
+        "kind": "CreateCollection",
+        "collectionId": "collection-012",
+        "roundId": "round-012",
+        "status": "pending",
+        "revision": 1
+      },
+      {
+        "operationId": "operation-013",
+        "kind": "CreateCollection",
+        "collectionId": "collection-013",
+        "roundId": "round-013",
+        "status": "pending",
+        "revision": 1
+      },
+      {
+        "operationId": "operation-014",
+        "kind": "CreateCollection",
+        "collectionId": "collection-014",
+        "roundId": "round-014",
+        "status": "pending",
+        "revision": 1
+      },
+      {
+        "operationId": "operation-015",
+        "kind": "CreateCollection",
+        "collectionId": "collection-015",
+        "roundId": "round-015",
+        "status": "pending",
+        "revision": 1
+      },
+      {
+        "operationId": "operation-016",
+        "kind": "CreateCollection",
+        "collectionId": "collection-016",
+        "roundId": "round-016",
+        "status": "pending",
+        "revision": 1
+      },
+      {
+        "operationId": "operation-017",
+        "kind": "CreateCollection",
+        "collectionId": "collection-017",
+        "roundId": "round-017",
+        "status": "pending",
+        "revision": 1
+      },
+      {
+        "operationId": "operation-018",
+        "kind": "CreateCollection",
+        "collectionId": "collection-018",
+        "roundId": "round-018",
+        "status": "pending",
+        "revision": 1
+      },
+      {
+        "operationId": "operation-019",
+        "kind": "CreateCollection",
+        "collectionId": "collection-019",
+        "roundId": "round-019",
+        "status": "pending",
+        "revision": 1
+      },
+      {
+        "operationId": "operation-020",
+        "kind": "CreateCollection",
+        "collectionId": "collection-020",
+        "roundId": "round-020",
+        "status": "pending",
+        "revision": 1
+      },
+      {
+        "operationId": "operation-021",
+        "kind": "CreateCollection",
+        "collectionId": "collection-021",
+        "roundId": "round-021",
+        "status": "pending",
+        "revision": 1
+      },
+      {
+        "operationId": "operation-022",
+        "kind": "CreateCollection",
+        "collectionId": "collection-022",
+        "roundId": "round-022",
+        "status": "pending",
+        "revision": 1
+      },
+      {
+        "operationId": "operation-023",
+        "kind": "CreateCollection",
+        "collectionId": "collection-023",
+        "roundId": "round-023",
+        "status": "pending",
+        "revision": 1
+      },
+      {
+        "operationId": "operation-024",
+        "kind": "CreateCollection",
+        "collectionId": "collection-024",
+        "roundId": "round-024",
+        "status": "pending",
+        "revision": 1
+      },
+      {
+        "operationId": "operation-025",
+        "kind": "CreateCollection",
+        "collectionId": "collection-025",
+        "roundId": "round-025",
+        "status": "pending",
+        "revision": 1
+      },
+      {
+        "operationId": "operation-026",
+        "kind": "CreateCollection",
+        "collectionId": "collection-026",
+        "roundId": "round-026",
+        "status": "pending",
+        "revision": 1
+      },
+      {
+        "operationId": "operation-027",
+        "kind": "CreateCollection",
+        "collectionId": "collection-027",
+        "roundId": "round-027",
+        "status": "pending",
+        "revision": 1
+      },
+      {
+        "operationId": "operation-028",
+        "kind": "CreateCollection",
+        "collectionId": "collection-028",
+        "roundId": "round-028",
+        "status": "pending",
+        "revision": 1
+      },
+      {
+        "operationId": "operation-029",
+        "kind": "CreateCollection",
+        "collectionId": "collection-029",
+        "roundId": "round-029",
+        "status": "pending",
+        "revision": 1
+      },
+      {
+        "operationId": "operation-030",
+        "kind": "CreateCollection",
+        "collectionId": "collection-030",
+        "roundId": "round-030",
+        "status": "pending",
+        "revision": 1
+      },
+      {
+        "operationId": "operation-031",
+        "kind": "CreateCollection",
+        "collectionId": "collection-031",
+        "roundId": "round-031",
+        "status": "pending",
+        "revision": 1
+      },
+      {
+        "operationId": "operation-032",
+        "kind": "CreateCollection",
+        "collectionId": "collection-032",
+        "roundId": "round-032",
+        "status": "pending",
+        "revision": 1
+      },
+      {
+        "operationId": "operation-033",
+        "kind": "CreateCollection",
+        "collectionId": "collection-033",
+        "roundId": "round-033",
+        "status": "pending",
+        "revision": 1
+      },
+      {
+        "operationId": "operation-034",
+        "kind": "CreateCollection",
+        "collectionId": "collection-034",
+        "roundId": "round-034",
+        "status": "pending",
+        "revision": 1
+      },
+      {
+        "operationId": "operation-035",
+        "kind": "CreateCollection",
+        "collectionId": "collection-035",
+        "roundId": "round-035",
+        "status": "pending",
+        "revision": 1
+      },
+      {
+        "operationId": "operation-036",
+        "kind": "CreateCollection",
+        "collectionId": "collection-036",
+        "roundId": "round-036",
+        "status": "pending",
+        "revision": 1
+      },
+      {
+        "operationId": "operation-037",
+        "kind": "CreateCollection",
+        "collectionId": "collection-037",
+        "roundId": "round-037",
+        "status": "pending",
+        "revision": 1
+      },
+      {
+        "operationId": "operation-038",
+        "kind": "CreateCollection",
+        "collectionId": "collection-038",
+        "roundId": "round-038",
+        "status": "pending",
+        "revision": 1
+      },
+      {
+        "operationId": "operation-039",
+        "kind": "CreateCollection",
+        "collectionId": "collection-039",
+        "roundId": "round-039",
+        "status": "pending",
+        "revision": 1
+      },
+      {
+        "operationId": "operation-040",
+        "kind": "CreateCollection",
+        "collectionId": "collection-040",
+        "roundId": "round-040",
+        "status": "pending",
+        "revision": 1
+      },
+      {
+        "operationId": "operation-041",
+        "kind": "CreateCollection",
+        "collectionId": "collection-041",
+        "roundId": "round-041",
+        "status": "pending",
+        "revision": 1
+      },
+      {
+        "operationId": "operation-042",
+        "kind": "CreateCollection",
+        "collectionId": "collection-042",
+        "roundId": "round-042",
+        "status": "pending",
+        "revision": 1
+      },
+      {
+        "operationId": "operation-043",
+        "kind": "CreateCollection",
+        "collectionId": "collection-043",
+        "roundId": "round-043",
+        "status": "pending",
+        "revision": 1
+      },
+      {
+        "operationId": "operation-044",
+        "kind": "CreateCollection",
+        "collectionId": "collection-044",
+        "roundId": "round-044",
+        "status": "pending",
+        "revision": 1
+      },
+      {
+        "operationId": "operation-045",
+        "kind": "CreateCollection",
+        "collectionId": "collection-045",
+        "roundId": "round-045",
+        "status": "pending",
+        "revision": 1
+      },
+      {
+        "operationId": "operation-046",
+        "kind": "CreateCollection",
+        "collectionId": "collection-046",
+        "roundId": "round-046",
+        "status": "pending",
+        "revision": 1
+      },
+      {
+        "operationId": "operation-047",
+        "kind": "CreateCollection",
+        "collectionId": "collection-047",
+        "roundId": "round-047",
+        "status": "pending",
+        "revision": 1
+      },
+      {
+        "operationId": "operation-048",
+        "kind": "CreateCollection",
+        "collectionId": "collection-048",
+        "roundId": "round-048",
+        "status": "pending",
+        "revision": 1
+      },
+      {
+        "operationId": "operation-049",
+        "kind": "CreateCollection",
+        "collectionId": "collection-049",
+        "roundId": "round-049",
+        "status": "pending",
+        "revision": 1
+      },
+      {
+        "operationId": "operation-050",
+        "kind": "CreateCollection",
+        "collectionId": "collection-050",
+        "roundId": "round-050",
+        "status": "pending",
+        "revision": 1
+      },
+      {
+        "operationId": "operation-051",
+        "kind": "CreateCollection",
+        "collectionId": "collection-051",
+        "roundId": "round-051",
+        "status": "pending",
+        "revision": 1
+      },
+      {
+        "operationId": "operation-052",
+        "kind": "CreateCollection",
+        "collectionId": "collection-052",
+        "roundId": "round-052",
+        "status": "pending",
+        "revision": 1
+      },
+      {
+        "operationId": "operation-053",
+        "kind": "CreateCollection",
+        "collectionId": "collection-053",
+        "roundId": "round-053",
+        "status": "pending",
+        "revision": 1
+      },
+      {
+        "operationId": "operation-054",
+        "kind": "CreateCollection",
+        "collectionId": "collection-054",
+        "roundId": "round-054",
+        "status": "pending",
+        "revision": 1
+      },
+      {
+        "operationId": "operation-055",
+        "kind": "CreateCollection",
+        "collectionId": "collection-055",
+        "roundId": "round-055",
+        "status": "pending",
+        "revision": 1
+      },
+      {
+        "operationId": "operation-056",
+        "kind": "CreateCollection",
+        "collectionId": "collection-056",
+        "roundId": "round-056",
+        "status": "pending",
+        "revision": 1
+      },
+      {
+        "operationId": "operation-057",
+        "kind": "CreateCollection",
+        "collectionId": "collection-057",
+        "roundId": "round-057",
+        "status": "pending",
+        "revision": 1
+      },
+      {
+        "operationId": "operation-058",
+        "kind": "CreateCollection",
+        "collectionId": "collection-058",
+        "roundId": "round-058",
+        "status": "pending",
+        "revision": 1
+      },
+      {
+        "operationId": "operation-059",
+        "kind": "CreateCollection",
+        "collectionId": "collection-059",
+        "roundId": "round-059",
+        "status": "pending",
+        "revision": 1
+      },
+      {
+        "operationId": "operation-060",
+        "kind": "CreateCollection",
+        "collectionId": "collection-060",
+        "roundId": "round-060",
+        "status": "pending",
+        "revision": 1
+      },
+      {
+        "operationId": "operation-061",
+        "kind": "CreateCollection",
+        "collectionId": "collection-061",
+        "roundId": "round-061",
+        "status": "pending",
+        "revision": 1
+      },
+      {
+        "operationId": "operation-062",
+        "kind": "CreateCollection",
+        "collectionId": "collection-062",
+        "roundId": "round-062",
+        "status": "pending",
+        "revision": 1
+      },
+      {
+        "operationId": "operation-063",
+        "kind": "CreateCollection",
+        "collectionId": "collection-063",
+        "roundId": "round-063",
+        "status": "pending",
+        "revision": 1
+      },
+      {
+        "operationId": "operation-064",
+        "kind": "CreateCollection",
+        "collectionId": "collection-064",
+        "roundId": "round-064",
+        "status": "pending",
+        "revision": 1
+      }
+    ],
+    "pendingCursor": "AQAAAAAAAABAAAAAAAAAAEE",
+    "recentResults": [
+      {
+        "collectionId": "done-001",
+        "roundId": "done-round-001",
+        "revision": 1
+      },
+      {
+        "collectionId": "done-002",
+        "roundId": "done-round-002",
+        "revision": 1
+      },
+      {
+        "collectionId": "done-003",
+        "roundId": "done-round-003",
+        "revision": 1
+      },
+      {
+        "collectionId": "done-004",
+        "roundId": "done-round-004",
+        "revision": 1
+      },
+      {
+        "collectionId": "done-005",
+        "roundId": "done-round-005",
+        "revision": 1
+      },
+      {
+        "collectionId": "done-006",
+        "roundId": "done-round-006",
+        "revision": 1
+      },
+      {
+        "collectionId": "done-007",
+        "roundId": "done-round-007",
+        "revision": 1
+      },
+      {
+        "collectionId": "done-008",
+        "roundId": "done-round-008",
+        "revision": 1
+      },
+      {
+        "collectionId": "done-009",
+        "roundId": "done-round-009",
+        "revision": 1
+      },
+      {
+        "collectionId": "done-010",
+        "roundId": "done-round-010",
+        "revision": 1
+      },
+      {
+        "collectionId": "done-011",
+        "roundId": "done-round-011",
+        "revision": 1
+      },
+      {
+        "collectionId": "done-012",
+        "roundId": "done-round-012",
+        "revision": 1
+      },
+      {
+        "collectionId": "done-013",
+        "roundId": "done-round-013",
+        "revision": 1
+      },
+      {
+        "collectionId": "done-014",
+        "roundId": "done-round-014",
+        "revision": 1
+      },
+      {
+        "collectionId": "done-015",
+        "roundId": "done-round-015",
+        "revision": 1
+      },
+      {
+        "collectionId": "done-016",
+        "roundId": "done-round-016",
+        "revision": 1
+      }
+    ]
+  }
+}

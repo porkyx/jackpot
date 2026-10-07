@@ -1,0 +1,22 @@
+package producttrace
+import("bytes";"context";"encoding/json";"strings";"sync";"sync/atomic";"testing";"time")
+func TestProfileDisabledNilAndExecutionContextKeepOriginalBehavior(t *testing.T){
+ oldEnabled,oldNow,oldOutput:=enabled,now,output;defer func(){enabled=oldEnabled;now=oldNow;output=oldOutput}()
+ enabled=false;ctx,cancel:=context.WithCancel(context.Background());defer cancel()
+ for _,original:=range []context.Context{nil,ctx}{actual,finish:=Root(original,"root");finish();if actual!=original{t.Fatal("disabled root changed context")};actual,finish=Begin(original,"child");finish();if actual!=original{t.Fatal("unowned child changed context")}}
+ enabled=true;actual,finish:=Root(nil,"nil");finish();if actual!=nil{t.Fatal("nil became context")}
+ var buffer bytes.Buffer;output=&buffer
+ caller,closeRoot:=Root(context.Background(),"test");execution,cancelExecution:=context.WithCancel(context.Background());inherited:=Inherit(execution,caller)
+ if inherited.Done()!=execution.Done()||inherited.Err()!=nil||!Active(inherited){t.Fatal("inherit changed execution ownership")};cancelExecution();if inherited.Err()!=context.Canceled{t.Fatal("inherit lost execution cancellation")}
+ if Inherit(nil,caller)!=nil||Inherit(execution,context.Background())!=execution{t.Fatal("unowned/nil inheritance changed context")};closeRoot();closeRoot();if strings.Count(buffer.String(),"JACKPOT_PHASE ")!=1{t.Fatal("root finish duplicated")}
+}
+func TestProfileNestedCountsExactBoundAndConcurrentRecording(t *testing.T){
+ oldEnabled,oldNow,oldOutput:=enabled,now,output;defer func(){enabled=oldEnabled;now=oldNow;output=oldOutput}();enabled=true
+ var ticks atomic.Int64;now=func()time.Time{return time.Date(2026,10,6,12,0,0,0,time.UTC).Add(time.Duration(ticks.Add(1))*time.Millisecond)}
+ var buffer bytes.Buffer;output=&buffer;ctx,finish:=Root(context.Background(),"root");child,end:=Begin(ctx,"child")
+ start:=now();Record(child,"decode",start);end();end()
+ var group sync.WaitGroup;for i:=0;i<32;i++{group.Add(1);go func(){defer group.Done();Record(ctx,"concurrent",now())}()};group.Wait()
+ for i:=0;i<130;i++{Record(ctx,string(rune('a'+i)),now())};Record(ctx,strings.Repeat("x",1025),now());Record(ctx,"bad\nname",now());finish()
+ line:=strings.TrimPrefix(strings.TrimSpace(buffer.String()),"JACKPOT_PHASE ");var actual record;if err:=json.Unmarshal([]byte(line),&actual);err!=nil{t.Fatal(err)}
+ if actual.Phases["root/child"].Calls!=1||actual.Phases["root/child/decode"].Calls!=1||actual.Phases["root/concurrent"].Calls!=32||actual.Phases["root/child/decode"].Milliseconds!=1||len(actual.Phases)!=128||!actual.Truncated{t.Fatal("profile count/bound/time changed",actual)}
+}

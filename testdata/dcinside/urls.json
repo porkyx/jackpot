@@ -1,0 +1,387 @@
+{
+  "observedAt": "2026-10-06",
+  "sourceLinks": [
+    "https://gall.dcinside.com",
+    "https://gall.dcinside.com/m",
+    "https://gall.dcinside.com/mini",
+    "https://gall.dcinside.com/p"
+  ],
+  "allowedHosts": [
+    "gall.dcinside.com",
+    "m.dcinside.com"
+  ],
+  "queryPolicy": "Preserve id/no; discard tracking. Validate same allowed host policy for every HTTP or explicitly parsed redirect; never execute script redirects.",
+  "cases": [
+    {
+      "id": "G-pc",
+      "input": "https://gall.dcinside.com/board/view/?id=tree&no=1019123",
+      "outcome": "accept",
+      "normalized": {
+        "galleryKind": "G",
+        "galleryId": "tree",
+        "articleNo": "1019123",
+        "canonicalUrl": "https://gall.dcinside.com/board/view/?id=tree&no=1019123"
+      },
+      "level": "live-public-read",
+      "httpStatus": 200,
+      "finalUrl": "https://gall.dcinside.com/board/view/?id=tree&no=1019123"
+    },
+    {
+      "id": "G-mobile",
+      "input": "https://m.dcinside.com/board/tree/1019123",
+      "outcome": "accept",
+      "normalized": {
+        "galleryKind": "G",
+        "galleryId": "tree",
+        "articleNo": "1019123",
+        "canonicalUrl": "https://gall.dcinside.com/board/view/?id=tree&no=1019123"
+      },
+      "level": "live-public-read",
+      "httpStatus": 200,
+      "finalUrl": "https://gall.dcinside.com/board/view/?id=tree&no=1019123",
+      "typeResolvedBy": "path and same-host redirect"
+    },
+    {
+      "id": "G-short",
+      "input": "https://gall.dcinside.com/tree/1019123",
+      "outcome": "accept",
+      "normalized": {
+        "galleryKind": "G",
+        "galleryId": "tree",
+        "articleNo": "1019123",
+        "canonicalUrl": "https://gall.dcinside.com/board/view/?id=tree&no=1019123"
+      },
+      "level": "live-public-read",
+      "httpStatus": 200,
+      "finalUrl": "https://gall.dcinside.com/board/view/?id=tree&no=1019123"
+    },
+    {
+      "id": "M-pc",
+      "input": "https://gall.dcinside.com/mgallery/board/view/?id=mechanicalkeyboard&no=2227600",
+      "outcome": "accept",
+      "normalized": {
+        "galleryKind": "M",
+        "galleryId": "mechanicalkeyboard",
+        "articleNo": "2227600",
+        "canonicalUrl": "https://gall.dcinside.com/mgallery/board/view/?id=mechanicalkeyboard&no=2227600"
+      },
+      "level": "live-public-read",
+      "httpStatus": 200,
+      "finalUrl": "https://gall.dcinside.com/mgallery/board/view/?id=mechanicalkeyboard&no=2227600"
+    },
+    {
+      "id": "M-mobile",
+      "input": "https://m.dcinside.com/board/mechanicalkeyboard/2227600",
+      "outcome": "accept",
+      "normalized": {
+        "galleryKind": "M",
+        "galleryId": "mechanicalkeyboard",
+        "articleNo": "2227600",
+        "canonicalUrl": "https://gall.dcinside.com/mgallery/board/view/?id=mechanicalkeyboard&no=2227600"
+      },
+      "level": "live-public-read",
+      "httpStatus": 200,
+      "finalUrl": "https://gall.dcinside.com/mgallery/board/view/?id=mechanicalkeyboard&no=2227600",
+      "typeResolvedBy": "same-host redirect; mobile board prefix alone cannot distinguish G/M"
+    },
+    {
+      "id": "M-short",
+      "input": "https://gall.dcinside.com/mgallery/mechanicalkeyboard/2227600",
+      "outcome": "accept",
+      "normalized": {
+        "galleryKind": "M",
+        "galleryId": "mechanicalkeyboard",
+        "articleNo": "2227600",
+        "canonicalUrl": "https://gall.dcinside.com/mgallery/board/view/?id=mechanicalkeyboard&no=2227600"
+      },
+      "level": "live-public-read",
+      "httpStatus": 200,
+      "finalUrl": "https://gall.dcinside.com/mgallery/board/view/?id=mechanicalkeyboard&no=2227600"
+    },
+    {
+      "id": "MI-pc",
+      "input": "https://gall.dcinside.com/mini/board/view/?id=compliment&no=33",
+      "outcome": "accept",
+      "normalized": {
+        "galleryKind": "MI",
+        "galleryId": "compliment",
+        "articleNo": "33",
+        "canonicalUrl": "https://gall.dcinside.com/mini/board/view/?id=compliment&no=33"
+      },
+      "level": "live-public-read",
+      "httpStatus": 200,
+      "finalUrl": "https://gall.dcinside.com/mini/board/view/?id=compliment&no=33"
+    },
+    {
+      "id": "MI-mobile",
+      "input": "https://m.dcinside.com/mini/compliment/33",
+      "outcome": "accept",
+      "normalized": {
+        "galleryKind": "MI",
+        "galleryId": "compliment",
+        "articleNo": "33",
+        "canonicalUrl": "https://gall.dcinside.com/mini/board/view/?id=compliment&no=33"
+      },
+      "level": "live-public-read",
+      "httpStatus": 200,
+      "finalUrl": "https://gall.dcinside.com/mini/board/view/?id=compliment&no=33",
+      "typeResolvedBy": "path and same-host redirect"
+    },
+    {
+      "id": "MI-short",
+      "input": "https://gall.dcinside.com/mini/compliment/33",
+      "outcome": "accept",
+      "normalized": {
+        "galleryKind": "MI",
+        "galleryId": "compliment",
+        "articleNo": "33",
+        "canonicalUrl": "https://gall.dcinside.com/mini/board/view/?id=compliment&no=33"
+      },
+      "level": "live-public-read",
+      "httpStatus": 200,
+      "finalUrl": "https://gall.dcinside.com/mini/board/view/?id=compliment&no=33"
+    },
+    {
+      "id": "PR-pc",
+      "input": "https://gall.dcinside.com/person/board/view/?id=samrorong&no=1157",
+      "outcome": "accept",
+      "normalized": {
+        "galleryKind": "PR",
+        "galleryId": "samrorong",
+        "articleNo": "1157",
+        "canonicalUrl": "https://gall.dcinside.com/person/board/view/?id=samrorong&no=1157"
+      },
+      "level": "live-public-read",
+      "httpStatus": 200,
+      "finalUrl": "https://gall.dcinside.com/person/board/view/?id=samrorong&no=1157"
+    },
+    {
+      "id": "PR-mobile",
+      "input": "https://m.dcinside.com/person/samrorong/1157",
+      "outcome": "accept",
+      "normalized": {
+        "galleryKind": "PR",
+        "galleryId": "samrorong",
+        "articleNo": "1157",
+        "canonicalUrl": "https://gall.dcinside.com/person/board/view/?id=samrorong&no=1157"
+      },
+      "level": "live-public-read",
+      "httpStatus": 200,
+      "finalUrl": "https://gall.dcinside.com/person/board/view/?id=samrorong&no=1157",
+      "typeResolvedBy": "path and same-host redirect"
+    },
+    {
+      "id": "PR-short",
+      "input": "https://gall.dcinside.com/person/samrorong/1157",
+      "outcome": "accept",
+      "normalized": {
+        "galleryKind": "PR",
+        "galleryId": "samrorong",
+        "articleNo": "1157",
+        "canonicalUrl": "https://gall.dcinside.com/person/board/view/?id=samrorong&no=1157"
+      },
+      "level": "live-public-read",
+      "httpStatus": 200,
+      "finalUrl": "https://gall.dcinside.com/person/board/view/?id=samrorong&no=1157"
+    },
+    {
+      "id": "MI-short-n",
+      "input": "https://gall.dcinside.com/n/compliment/33",
+      "outcome": "accept",
+      "normalized": {
+        "galleryKind": "MI",
+        "galleryId": "compliment",
+        "articleNo": "33",
+        "canonicalUrl": "https://gall.dcinside.com/mini/board/view/?id=compliment&no=33"
+      },
+      "level": "live-public-read",
+      "httpStatus": 200,
+      "finalUrl": "https://gall.dcinside.com/mini/board/view/?id=compliment&no=33"
+    },
+    {
+      "id": "scheme-omitted",
+      "input": "gall.dcinside.com/board/view/?id=tree&no=1019123",
+      "outcome": "accept",
+      "normalized": {
+        "galleryKind": "G",
+        "galleryId": "tree",
+        "articleNo": "1019123",
+        "canonicalUrl": "https://gall.dcinside.com/board/view/?id=tree&no=1019123"
+      },
+      "level": "product-contract",
+      "transportObserved": false
+    },
+    {
+      "id": "http-upgrade",
+      "input": "http://m.dcinside.com/board/tree/1019123",
+      "outcome": "accept",
+      "normalized": {
+        "galleryKind": "G",
+        "galleryId": "tree",
+        "articleNo": "1019123",
+        "canonicalUrl": "https://gall.dcinside.com/board/view/?id=tree&no=1019123"
+      },
+      "level": "product-contract",
+      "transportObserved": false
+    },
+    {
+      "id": "tracking-discard",
+      "input": "https://gall.dcinside.com/board/view/?id=tree&no=1019123&page=7&utm_source=fixture",
+      "outcome": "accept",
+      "normalized": {
+        "galleryKind": "G",
+        "galleryId": "tree",
+        "articleNo": "1019123",
+        "canonicalUrl": "https://gall.dcinside.com/board/view/?id=tree&no=1019123"
+      },
+      "level": "product-contract",
+      "transportObserved": false
+    },
+    {
+      "id": "gallery-list",
+      "input": "https://gall.dcinside.com/board/lists/?id=tree",
+      "outcome": "reject",
+      "reason": "not_an_article",
+      "level": "product-contract",
+      "transportObserved": false
+    },
+    {
+      "id": "mobile-list",
+      "input": "https://m.dcinside.com/board/tree",
+      "outcome": "reject",
+      "reason": "not_an_article",
+      "level": "product-contract",
+      "transportObserved": false
+    },
+    {
+      "id": "foreign-host",
+      "input": "https://example.invalid/board/view/?id=tree&no=1",
+      "outcome": "reject",
+      "reason": "host_not_allowed",
+      "level": "product-contract",
+      "transportObserved": false
+    },
+    {
+      "id": "host-suffix",
+      "input": "https://gall.dcinside.com.example.invalid/board/view/?id=tree&no=1",
+      "outcome": "reject",
+      "reason": "host_not_allowed",
+      "level": "product-contract",
+      "transportObserved": false
+    },
+    {
+      "id": "subdomain",
+      "input": "https://other.dcinside.com/board/view/?id=tree&no=1",
+      "outcome": "reject",
+      "reason": "host_not_allowed",
+      "level": "product-contract",
+      "transportObserved": false
+    },
+    {
+      "id": "userinfo",
+      "input": "https://fixture_user@gall.dcinside.com/board/view/?id=tree&no=1",
+      "outcome": "reject",
+      "reason": "userinfo_forbidden",
+      "level": "product-contract",
+      "transportObserved": false
+    },
+    {
+      "id": "arbitrary-port",
+      "input": "https://gall.dcinside.com:8080/board/view/?id=tree&no=1",
+      "outcome": "reject",
+      "reason": "port_forbidden",
+      "level": "product-contract",
+      "transportObserved": false
+    },
+    {
+      "id": "local-host",
+      "input": "http://127.0.0.1/board/view/?id=tree&no=1",
+      "outcome": "reject",
+      "reason": "host_not_allowed",
+      "level": "product-contract",
+      "transportObserved": false
+    },
+    {
+      "id": "file",
+      "input": "file:///fixture.html",
+      "outcome": "reject",
+      "reason": "scheme_not_allowed",
+      "level": "product-contract",
+      "transportObserved": false
+    },
+    {
+      "id": "empty-gallery",
+      "input": "https://gall.dcinside.com/board/view/?id=&no=1",
+      "outcome": "reject",
+      "reason": "invalid_gallery",
+      "level": "product-contract",
+      "transportObserved": false
+    },
+    {
+      "id": "empty-number",
+      "input": "https://gall.dcinside.com/board/view/?id=tree&no=",
+      "outcome": "reject",
+      "reason": "invalid_article_number",
+      "level": "product-contract",
+      "transportObserved": false
+    },
+    {
+      "id": "zero-number",
+      "input": "https://gall.dcinside.com/board/view/?id=tree&no=0",
+      "outcome": "reject",
+      "reason": "invalid_article_number",
+      "level": "product-contract",
+      "transportObserved": false
+    },
+    {
+      "id": "negative-number",
+      "input": "https://gall.dcinside.com/board/view/?id=tree&no=-1",
+      "outcome": "reject",
+      "reason": "invalid_article_number",
+      "level": "product-contract",
+      "transportObserved": false
+    },
+    {
+      "id": "fractional-number",
+      "input": "https://gall.dcinside.com/board/view/?id=tree&no=1.5",
+      "outcome": "reject",
+      "reason": "invalid_article_number",
+      "level": "product-contract",
+      "transportObserved": false
+    },
+    {
+      "id": "nan-number",
+      "input": "https://gall.dcinside.com/board/view/?id=tree&no=NaN",
+      "outcome": "reject",
+      "reason": "invalid_article_number",
+      "level": "product-contract",
+      "transportObserved": false
+    },
+    {
+      "id": "infinity-number",
+      "input": "https://gall.dcinside.com/board/view/?id=tree&no=Infinity",
+      "outcome": "reject",
+      "reason": "invalid_article_number",
+      "level": "product-contract",
+      "transportObserved": false
+    }
+  ],
+  "observations": [
+    {
+      "input": "https://gall.dcinside.com/mechanicalkeyboard/2227600",
+      "level": "live-public-read",
+      "httpStatus": 200,
+      "httpFinalUrl": "https://gall.dcinside.com/board/view/?id=mechanicalkeyboard&no=2227600",
+      "responseKind": "script_redirect_only",
+      "scriptTarget": "https://gall.dcinside.com/mgallery/board/view?id=mechanicalkeyboard&no=2227600",
+      "verifiedArticle": false,
+      "note": "139-byte HTTP 200 response is not a loaded article; prefer verified mgallery short/mobile/PC form."
+    },
+    {
+      "input": "https://gall.dcinside.com/board/mechanicalkeyboard/2227600",
+      "level": "live-public-read",
+      "httpStatus": 404,
+      "verifiedArticle": false
+    }
+  ]
+}

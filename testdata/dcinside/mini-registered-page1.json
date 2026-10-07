@@ -1,0 +1,15 @@
+{
+  "total_cnt": 4,
+  "comment_cnt": 0,
+  "comments": [
+    {"no":"7001","parent":"9008","name":"Participant_1","user_id":"user_1","ip":"","reg_date":"10.06 12:00:00","nicktype":"20","gallog_icon":"<span>Participant_1</span>","memo":"fixture comment 1","depth":0,"c_no":0,"del_yn":"N","is_delete":"0"},
+    {"no":"7002","parent":"9008","name":"Participant_2","user_id":"user_2","ip":"","reg_date":"10.06 12:00:01","nicktype":"00","gallog_icon":"<span>Participant_2</span>","memo":"fixture comment 2","depth":0,"c_no":0,"del_yn":"N","is_delete":"0"},
+    {"no":"7003","parent":"9008","name":"Participant_3","user_id":"user_3","ip":"","reg_date":"10.06 12:00:02","nicktype":"00","gallog_icon":"<span>Participant_3</span>","memo":"<img class=\"written_dccon\" src=\"https://example.invalid/dccon-fixture.png\">","depth":1,"c_no":"7002","del_yn":"N","is_delete":"0"},
+    {"no":"7004","parent":"9008","name":"Participant_2","user_id":"user_2","ip":"","reg_date":"10.06 12:00:03","nicktype":"00","gallog_icon":"<span>Participant_2</span>","memo":"fixture comment 4","depth":1,"c_no":"7001","del_yn":"N","is_delete":"0"},
+    {"no":"7005","parent":"9008","name":"Participant_4","user_id":"","ip":"","reg_date":"10.06 12:00:04","nicktype":"COMMENT_BOY","gallog_icon":"<span>Participant_4</span>","memo":"fixture comment advertisement","depth":0,"c_no":0,"del_yn":"N","is_delete":"0"}
+  ],
+  "pagination": "<em>1</em>",
+  "allow_reply": 1,
+  "comment_view_cnt": 4,
+  "nft": false
+}

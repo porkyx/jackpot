@@ -1,0 +1,149 @@
+package sqlite
+
+import (
+ "context"
+ "encoding/json"
+ "crypto/sha256"
+ "errors"
+"fmt"
+ "github.com/porkyx/jackpot/internal/contracts"
+ rl "github.com/porkyx/jackpot/internal/roundlifecycle"
+ "reflect"
+ "strings"
+ "testing"
+ "time"
+ PRODUCT_TRACE_IMPORT
+)
+
+func TestAdmissionPrivateStageInactiveNilAndNoOwnedRootHaveObserverZero(t *testing.T) {
+ old:=profileAdmissionRecord;defer func(){profileAdmissionRecord=old}()
+ profileAdmissionRecord=func(context.Context,string,time.Time){t.Fatal("inactive stage called observer")}
+ for _,ctx:=range []context.Context{nil,context.Background()} {stages:=newProfileAdmissionStages(ctx);stages.Next("admit.candidateExecLoop");stages.Finish();stages.Finish();if stages.ctx!=ctx {t.Fatal("stage changed original context")}}
+}
+func TestAdmissionPrivateStageExactBlocksIdempotencyAndContextOwnership(t *testing.T) {
+ ctx,cancel:=context.WithDeadline(context.Background(),time.Now().Add(time.Hour));defer cancel()
+ owned,finish:=producttrace.Root(ctx,"test.privateAdmission");defer finish()
+ if !producttrace.Active(owned) {t.Fatal("private helper test requires child JACKPOT_PHASE_PROFILE=1")}
+ oldNow,oldRecord:=profileAdmissionNow,profileAdmissionRecord;defer func(){profileAdmissionNow=oldNow;profileAdmissionRecord=oldRecord}()
+ var tick int64;profileAdmissionNow=func()time.Time{tick++;return time.Unix(0,tick)}
+ var names []string;var starts []time.Time
+ profileAdmissionRecord=func(actual context.Context,name string,started time.Time){if actual!=owned {t.Fatal("stage changed owned context")};names=append(names,name);starts=append(starts,started)}
+ stages:=newProfileAdmissionStages(owned);stages.Next("admit.candidateExecLoop");stages.Next("admit.commit");cancel();stages.Finish();stages.Finish();stages.Next("admit.operationInsert")
+ if !reflect.DeepEqual(names,[]string{"admit.preconditions","admit.candidateExecLoop","admit.commit"}) || len(starts)!=3 || !starts[0].Before(starts[1]) || !starts[1].Before(starts[2]) {t.Fatal(names,starts)}
+ if stages.ctx.Done()!=ctx.Done() || stages.ctx.Err()!=context.Canceled {t.Fatal("observer changed cancellation")}
+ originalDeadline,_:=ctx.Deadline();actualDeadline,_:=stages.ctx.Deadline();if originalDeadline!=actualDeadline {t.Fatal("observer changed deadline")}
+}
+func TestAdmissionPrivateStageUnknownNameCannotLogIDPasswordOrRawPayload(t *testing.T) {
+ ctx,finish:=producttrace.Root(context.Background(),"test.privateAdmissionLabels");defer finish()
+ old:=profileAdmissionRecord;defer func(){profileAdmissionRecord=old}()
+ var names []string;profileAdmissionRecord=func(_ context.Context,name string,_ time.Time){names=append(names,name)}
+ for _,name:=range []string{"", "password-secret", "participant-user-name", strings.Repeat("x",2000), "admit.commit\nraw"} {stages:=newProfileAdmissionStages(ctx);stages.Next(name);stages.Finish();if names[len(names)-1]!="admit.invalidPhaseLabel" {t.Fatal("untrusted label logged",names)}}
+}
+func TestAdmissionPrivateProfileActualSQLitePragmasAndQueryPlans(t *testing.T) {
+ store:=migratedTestStore(t)
+ configuration:=map[string]any{}
+ for _,pragma:=range []string{"journal_mode","synchronous","foreign_keys","busy_timeout","cache_size","page_size","temp_store","wal_autocheckpoint","locking_mode","read_uncommitted"} {
+  var value any;if err:=store.db.QueryRowContext(context.Background(),"PRAGMA "+pragma).Scan(&value);err!=nil {t.Fatal(pragma,err)};configuration[pragma]=value
+ }
+ var version string;if err:=store.db.QueryRow("SELECT sqlite_version()").Scan(&version);err!=nil {t.Fatal(err)};configuration["sqlite_version"]=version;configuration["max_open_connections"]=store.db.Stats().MaxOpenConnections
+ if configuration["journal_mode"]!="wal" || configuration["synchronous"]!=int64(2) || configuration["foreign_keys"]!=int64(1) || configuration["busy_timeout"]!=int64(1000) || store.db.Stats().MaxOpenConnections!=1 {t.Fatal("private fixture weakened production durability",configuration)}
+ plans:=map[string][]string{}
+ for _,query:=range []struct{name,sql string;args []any}{
+  {"candidateParticipantTrigger",`SELECT 1 FROM participants WHERE collection_id=? AND id=? AND included=1`,[]any{"profile-unused","profile-unused"}},
+  {"candidateWinnerTrigger",`SELECT 1 FROM winners WHERE collection_id=? AND participant_id=?`,[]any{"profile-unused","profile-unused"}},
+  {"candidateRoundFK",`SELECT 1 FROM rounds WHERE collection_id=? AND id=?`,[]any{"profile-unused","profile-unused"}},
+  {"allPastIDs",`SELECT id FROM rounds WHERE collection_id=? ORDER BY number`,[]any{"profile-unused"}},
+  {"targetRound",`ACTUAL_ROUND_SQL`,[]any{"profile-unused"}},
+  {"operationLookup",`SELECT operation_id,kind,collection_id,round_id,status,revision,public_fingerprint,failure_code FROM operations WHERE operation_id=?`,[]any{"profile-unused"}},
+  {"timerHint",`SELECT EXISTS(SELECT 1 FROM rounds WHERE state IN ('scheduled','executing'))`,nil},
+ } {
+  rows,err:=store.db.QueryContext(context.Background(),"EXPLAIN QUERY PLAN "+query.sql,query.args...);if err!=nil{t.Fatal(query.name,err)}
+  entries:=make([]string,0)
+  for rows.Next(){var id,parent,unused int;var detail string;if err:=rows.Scan(&id,&parent,&unused,&detail);err!=nil{rows.Close();t.Fatal(err)};if len(entries)>=64 || len(detail)>2048{rows.Close();t.Fatal("query plan observation exceeds bounded output")};entries=append(entries,detail)}
+  if err:=rows.Err();err!=nil{rows.Close();t.Fatal(err)};if err:=rows.Close();err!=nil{t.Fatal(err)};if len(entries)==0{t.Fatal("actual SQL query plan empty",query.name)};plans[query.name]=entries
+ }
+ assertNoHandles(t,store)
+ report:=struct{Configuration map[string]any `json:"configuration"`;Plans map[string][]string `json:"plans"`;ActualSQLite bool `json:"actualSQLite"`;TimingOrPerformanceClaim bool `json:"timingOrPerformanceClaim"`}{configuration,plans,true,false}
+ raw,err:=json.Marshal(report);if err!=nil || len(raw)>64<<10{t.Fatal("bounded query plan report",err)};t.Log("JACKPOT_ADMISSION_QUERY_PLAN "+string(raw))
+}
+
+func TestAdmissionPrivateActiveObserverKeepsSQLitePayloadReplayCancellationAndCounts(t *testing.T) {
+ oldRecord:=profileAdmissionRecord;defer func(){profileAdmissionRecord=oldRecord}()
+ var baselineJSON,baselineRows string
+ for _,observed:=range []bool{false,true} {
+  store:=migratedTestStore(t);entropy:=new(productEntropy);kdf:=new(productKDF);service:=productService(t,store,kdf,entropy,func()time.Time{return storageNow},"session-one",nil)
+  ctx:=context.Background();finish:=func(){};candidateSpans:=0
+  if observed {ctx,finish=producttrace.Root(ctx,"test.privateAdmissionTrace");profileAdmissionRecord=func(ctx context.Context,name string,started time.Time){if name=="admit.candidateExecLoop"{candidateSpans++};oldRecord(ctx,name,started)}}
+  request:=productRequest(storageNow,rl.ImmediateMode)
+  round,err:=service.CreateCollection(ctx,request);if err!=nil{t.Fatal(err)}
+  replay,err:=service.CreateCollection(ctx,request);if err!=nil || !reflect.DeepEqual(round,replay) {t.Fatal("private observer changed replay")}
+  wrong:=request;wrong.Input.Message="different";_,err=service.CreateCollection(ctx,wrong);if !errors.Is(err,rl.ErrOperationConflict){t.Fatal("private observer changed conflict error",err)}
+  cancelled,cancel:=context.WithCancel(ctx);cancel();_,err=service.Rerun(cancelled,rl.RerunRequest{OperationID:"private-cancelled",Context:contracts.CollectionContext{BackendSessionID:"session-one",CollectionID:round.CollectionID,Revision:round.Revision},Prizes:[]rl.Prize{{ID:"other",Count:1}},Mode:rl.ImmediateMode});if !errors.Is(err,context.Canceled){t.Fatal("private observer changed cancellation",err)}
+  if entropy.calls.Load()!=1 || kdf.derive.Load()!=1 || store.db.Stats().InUse!=0 {t.Fatal("private observer changed side effects")}
+  raw,err:=json.Marshal(round);if err!=nil{t.Fatal(err)};rows:=corruptionDurableSnapshot(t,store)
+  if !observed {baselineJSON=string(raw);baselineRows=rows} else if baselineJSON!=string(raw) || baselineRows!=rows || candidateSpans!=1 {t.Fatal("private observer changed full round/SQL bytes or counted per row")}
+  assertRoundSQLIntegrity(t,store);assertNoHandles(t,store);finish();profileAdmissionRecord=oldRecord
+ }
+ t.Logf("private active/off exact public RoundRecord SHA256=%x; all 10 SQL tables equal; no timing acceptance",sha256.Sum256([]byte(baselineJSON)))
+}
+func TestAdmissionPrivateManualPagedRerunReplayRollbackAndReopenTraceExactWithObserverOffOn(t *testing.T) {
+ oldRecord:=profileAdmissionRecord
+ defer func(){profileAdmissionRecord=oldRecord}()
+ var originalTrace, originalRows string
+ for _,observed:=range []bool{false,true} {
+  store:=migratedTestStore(t)
+  entropy,kdf:=new(productEntropy),new(productKDF)
+  service:=productService(t,store,kdf,entropy,func()time.Time{return storageNow},"session-one",nil)
+  ctx:=context.Background();finish:=func(){}
+  if observed {ctx,finish=producttrace.Root(ctx,"test.privateManualPagedTrace")}
+  request:=productRequest(storageNow,rl.ImmediateMode)
+  request.Collection.Participants[0].Manual=&rl.ManualStateSnapshot{ManualIncluded:true}
+  request.Collection.Participants[1].Manual=&rl.ManualStateSnapshot{OverrideExcluded:true}
+  var rounds []rl.RoundRecord
+  round,err:=service.CreateCollection(ctx,request);if err!=nil{t.Fatal(err)}
+  rounds=append(rounds,round)
+  for number:=2;number<=3;number++ {
+   rerun:=rl.RerunRequest{OperationID:contracts.OperationID(fmt.Sprintf("private-paged-%d",number)),Context:contracts.CollectionContext{BackendSessionID:"session-one",CollectionID:round.CollectionID,Revision:round.Revision},Prizes:[]rl.Prize{{ID:"private-paged-prize",Count:1}},Mode:rl.ImmediateMode}
+   round,err=service.Rerun(ctx,rerun);if err!=nil{t.Fatal(err)}
+   replay,replayErr:=service.Rerun(ctx,rerun)
+   if replayErr!=nil || !reflect.DeepEqual(round,replay){t.Fatal("observer changed rerun replay",replayErr)}
+   rounds=append(rounds,round)
+  }
+  var pages []rl.CollectionPage
+  for _,query:=range []rl.CollectionPageQuery{{Limit:1},{Limit:1,Offset:2},{Limit:1,RoundID:rounds[0].ID},{Limit:50,Offset:^uint32(0)}} {
+   page,readErr:=store.ReadCollectionPage(ctx,round.CollectionID,query)
+   if readErr!=nil || page.Total!=3 || page.ConsumedCount!=3 || page.LatestRound.ID!=round.ID || page.Revision!=round.Revision {t.Fatal("observer changed atomic latest/global page",readErr)}
+   if page.Frozen.Participants[0].Manual==nil || !page.Frozen.Participants[0].Manual.ManualIncluded || page.Frozen.Participants[1].Manual==nil || !page.Frozen.Participants[1].Manual.OverrideExcluded || page.Frozen.Participants[2].Manual!=nil {t.Fatal("observer changed explicit manual bits/legacy unknown")}
+   pages=append(pages,page)
+  }
+  durable:=corruptionDurableSnapshot(t,store)
+  // The second candidate fails only after participant/operation/round and first
+  // candidate writes, exercising the original outer rollback and close paths.
+  execSQL(t,store.db,`CREATE TRIGGER private_admission_fault BEFORE INSERT ON round_candidates WHEN NEW.position=1 BEGIN SELECT RAISE(ABORT,'injected profile admission failure'); END`)
+  failing:=productRequest(storageNow,rl.ImmediateMode)
+  failing.OperationID="private-paged-failure"
+  failing.Context.DraftID="private-paged-failure-draft"
+  failing.Collection.SourceDraftID=failing.Context.DraftID
+  _,failErr:=service.CreateCollection(ctx,failing)
+  requireFault(t,failErr,contracts.StorageUnavailable)
+  if durable!=corruptionDurableSnapshot(t,store) || entropy.calls.Load()!=3 || kdf.derive.Load()!=2 {t.Fatal("observer changed partial rollback or KDF/RNG boundary")}
+  operation,readErr:=store.ReadOperation(ctx,failing.OperationID)
+  if readErr!=nil || operation.Status!=contracts.OperationUnknown {t.Fatal("observer persisted failed admission",readErr)}
+  execSQL(t,store.db,"DROP TRIGGER private_admission_fault")
+  assertRoundSQLIntegrity(t,store);assertNoHandles(t,store)
+  if err=service.Close(context.Background());err!=nil{t.Fatal(err)}
+  path:=store.path
+  if err=store.Close();err!=nil{t.Fatal(err)}
+  reopened,err:=Open(context.Background(),path);if err!=nil{t.Fatal(err)}
+  restored,err:=reopened.ReadCollectionPage(ctx,round.CollectionID,rl.CollectionPageQuery{Limit:1,Offset:2})
+  if err!=nil || !reflect.DeepEqual(restored,pages[1]) || durable!=corruptionDurableSnapshot(t,reopened){reopened.Close();t.Fatal("observer changed reopened manual/page graph",err)}
+  assertNoHandles(t,reopened)
+  rows:=corruptionDurableSnapshot(t,reopened)
+  if err=reopened.Close();err!=nil{t.Fatal(err)}
+  trace:=struct{Rounds []rl.RoundRecord;Pages []rl.CollectionPage;Restored rl.CollectionPage;Unknown rl.OperationRecord;Fault contracts.ErrorCode}{rounds,pages,restored,operation,contracts.StorageUnavailable}
+  raw,err:=json.Marshal(trace);if err!=nil{t.Fatal(err)}
+  if !observed {originalTrace=string(raw);originalRows=rows} else if originalTrace!=string(raw) || originalRows!=rows {t.Fatal("observer changed complete public trace or all durable fields")}
+  finish()
+ }
+ t.Logf("private manual/page observer off/on exact trace SHA256=%x; durable10tables identical; acceptancefalse",sha256.Sum256([]byte(originalTrace)))
+}

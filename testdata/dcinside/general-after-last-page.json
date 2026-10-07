@@ -1,0 +1,9 @@
+{
+  "total_cnt": 10,
+  "comment_cnt": 0,
+  "comments": [],
+  "pagination": "<a href=\"javascript:viewComments(1,'D',true)\">1</a>",
+  "allow_reply": 1,
+  "comment_view_cnt": 0,
+  "nft": false
+}

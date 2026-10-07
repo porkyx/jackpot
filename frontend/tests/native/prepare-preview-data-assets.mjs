@@ -1,0 +1,18 @@
+import assert from "node:assert/strict";
+import {mkdtemp,readFile,writeFile,cp} from "node:fs/promises";
+import {resolve,sep} from "node:path";
+import {fileURLToPath} from "node:url";
+import {createHash} from "node:crypto";
+const root=fileURLToPath(new URL("../../../",import.meta.url)),task=resolve(root,".task"),source=resolve(root,"frontend/dist");
+const original=await readFile(resolve(source,"index.html"),"utf8");
+const before="img-src &#39;self&#39; blob:",after=before+" data:";
+assert.equal(original.split(before).length,2);assert.ok(!original.includes(after));
+const target=await mkdtemp(resolve(task,"stress-assets-data-"));assert.ok(target.startsWith(task+sep));
+await cp(source,target,{recursive:true,errorOnExist:true,force:false});
+const changed=original.replace(before,after);await writeFile(resolve(target,"index.html"),changed);
+assert.equal(await readFile(resolve(source,"index.html"),"utf8"),original,"production HTML changed");
+const hash=bytes=>createHash("sha256").update(bytes).digest("hex");
+const scripts=[...original.matchAll(/(?:src|href)="(\/assets\/[^"]+)"/g)].map(match=>match[1]);
+for(const asset of scripts)assert.equal(hash(await readFile(resolve(target,"."+asset))),hash(await readFile(resolve(source,"."+asset))),"fixture asset changed");
+const manifest={target,source,sourceHTMLSHA256:hash(original),diagnosticHTMLSHA256:hash(changed),scripts,change:"only img-src permits local PNG data URI; production CSP is unchanged"};
+await writeFile(resolve(task,"product-preview-assets-manifest.json"),JSON.stringify(manifest,null,2));console.log(JSON.stringify(manifest));

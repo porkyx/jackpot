@@ -1,0 +1,6 @@
+package sqlite
+import("context";"database/sql";"time";PRODUCT_TRACE_IMPORT;rl "github.com/porkyx/jackpot/internal/roundlifecycle")
+func profileDecode(ctx context.Context,raw string,target any)error{if !producttrace.Active(ctx){return decodeStored(raw,target)};start:=time.Now();defer producttrace.Record(ctx,"strictJSON",start);return decodeStored(raw,target)}
+func profileInput(ctx context.Context,input rl.RoundInput)error{if !producttrace.Active(ctx){return rl.ValidateRoundInput(input)};start:=time.Now();defer producttrace.Record(ctx,"ValidateRoundInput",start);return rl.ValidateRoundInput(input)}
+func profileOutcome(ctx context.Context,input rl.RoundInput,outcome rl.Outcome)error{if !producttrace.Active(ctx){return rl.ValidateOutcome(input,outcome)};start:=time.Now();defer producttrace.Record(ctx,"ValidateOutcome",start);return rl.ValidateOutcome(input,outcome)}
+func profileBeginTx(ctx context.Context,db *sql.DB,options *sql.TxOptions)(*sql.Tx,error){if !producttrace.Active(ctx){return db.BeginTx(ctx,options)};start:=time.Now();defer producttrace.Record(ctx,"BeginTxIncludingPoolWait",start);return db.BeginTx(ctx,options)}

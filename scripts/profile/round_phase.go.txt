@@ -1,0 +1,47 @@
+package producttrace
+
+import (
+ "context"
+ "encoding/json"
+ "io"
+ "os"
+ "strings"
+ "sync"
+ "sync/atomic"
+ "time"
+)
+type key struct{}
+type metric struct { Calls uint64 `json:"calls"`; Milliseconds float64 `json:"milliseconds"` }
+type record struct { Name string `json:"name"`; Sequence uint64 `json:"sequence"`; StartedUTC string `json:"startedUTC"`; ElapsedMS float64 `json:"elapsedMs"`; Phases map[string]metric `json:"phases"`; Truncated bool `json:"truncated"`; mu sync.Mutex; pending uint64 }
+type span struct { record *record; path string }
+var enabled=os.Getenv("JACKPOT_PHASE_PROFILE")=="1"
+var now=time.Now
+var output io.Writer=os.Stderr
+var outputMu sync.Mutex
+var sequence atomic.Uint64
+func Root(ctx context.Context,name string)(context.Context,func()){
+ if !enabled||ctx==nil{return ctx,func(){}}
+ started:=now();r:=&record{Name:name,Sequence:sequence.Add(1),StartedUTC:started.UTC().Format(time.RFC3339Nano),Phases:map[string]metric{}}
+ once:=new(sync.Once)
+ return context.WithValue(ctx,key{},span{record:r,path:name}),func(){once.Do(func(){
+  r.mu.Lock();r.ElapsedMS=float64(now().Sub(started))/float64(time.Millisecond);if r.pending!=0{r.Truncated=true};bytes,err:=json.Marshal(r);r.mu.Unlock();if err!=nil{return}
+  outputMu.Lock();defer outputMu.Unlock();_,_=output.Write(append(append([]byte("JACKPOT_PHASE "),bytes...), '\n'))
+ })}
+}
+func Begin(ctx context.Context,name string)(context.Context,func()){
+ parent,ok:=value(ctx);if !ok{return ctx,func(){}}
+ started:=now();child:=span{record:parent.record,path:parent.path+"/"+name};once:=new(sync.Once);parent.record.mu.Lock();parent.record.pending++;parent.record.mu.Unlock()
+ return context.WithValue(ctx,key{},child),func(){once.Do(func(){add(child,child.path,now().Sub(started));child.record.mu.Lock();child.record.pending--;child.record.mu.Unlock()})}
+}
+func value(ctx context.Context)(span,bool){if ctx==nil{return span{},false};parent,ok:=ctx.Value(key{}).(span);return parent,ok&&parent.record!=nil}
+func Active(ctx context.Context)bool{_,ok:=value(ctx);return ok}
+func Record(ctx context.Context,name string,started time.Time){if parent,ok:=value(ctx);ok{add(parent,parent.path+"/"+name,now().Sub(started))}}
+func add(parent span,path string,elapsed time.Duration){
+ r:=parent.record;r.mu.Lock();defer r.mu.Unlock()
+ if len(path)>1024||strings.ContainsAny(path,"\r\n"){r.Truncated=true;return}
+ old,exists:=r.Phases[path];if !exists&&len(r.Phases)>=128{r.Truncated=true;return}
+ old.Calls++;old.Milliseconds+=float64(elapsed)/float64(time.Millisecond);r.Phases[path]=old
+}
+// Propagate only the private diagnostic value. Execution deadline/cancellation
+// always come from the original application execution context.
+func Inherit(execution,caller context.Context)context.Context{if execution==nil{return execution};if parent,ok:=value(caller);ok{return context.WithValue(execution,key{},parent)};return execution}

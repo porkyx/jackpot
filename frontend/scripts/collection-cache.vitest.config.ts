@@ -1,0 +1,2 @@
+import {defineConfig} from "vitest/config";
+export default defineConfig({test:{environment:"happy-dom",include:["tests/integration/collection-cache.test.ts"],coverage:{provider:"v8",include:["src/operations/collectionCache.ts"],reportsDirectory:"coverage/collection-cache",reporter:["text","json"],thresholds:{statements:100,branches:100,functions:100,lines:100}}}});

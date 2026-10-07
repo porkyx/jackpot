@@ -1,0 +1,153 @@
+{
+  "observedAt": "2026-10-06",
+  "sourceLevel": "live-public-read",
+  "commentsCreated": 0,
+  "notes": "Identifiers, names, IP fragments, dates, memo text, image URLs and interaction HTML are synthetic replacements; row field names/types and relationships are observed. Voice/name-change/year-rollover completion remain unverified.",
+  "samples": [
+    {
+      "fixture": "general-page1.json",
+      "kind": "G",
+      "sourceUrl": "https://gall.dcinside.com/board/view/?id=tree&no=1019123",
+      "sourceSha256": "cab688e6837f91e35d6a1aeac91821443a9adb1195d8e2c73d19e88ee5b29566",
+      "fixtureSha256": "cfe74d26bbf0f3dbbff7afa63adcf3a04970f1d553b3b7769987d29a531927c3",
+      "fixtureArticleNo": 9000,
+      "rawRows": 11,
+      "totalCount": 10,
+      "deletedRows": 0,
+      "advertisingRows": 1,
+      "author": {
+        "name": "Participant_5",
+        "user_id": "user_5",
+        "ip": null,
+        "identitySufficient": true,
+        "matchingRowIds": [
+          "1005",
+          "1006",
+          "1008"
+        ]
+      }
+    },
+    {
+      "fixture": "minor-page1.json",
+      "kind": "M",
+      "sourceUrl": "https://gall.dcinside.com/mgallery/board/view/?id=mechanicalkeyboard&no=2227600",
+      "sourceSha256": "94a9766b0bd1c40be5938156c6c00e7d879767ec4e4be7605131a0758e10989f",
+      "fixtureSha256": "bc336f377b0602bd4d73bd897a683629ff9ee8d701529ec6270f48ec98240547",
+      "fixtureArticleNo": 9001,
+      "rawRows": 7,
+      "totalCount": 5,
+      "deletedRows": 1,
+      "advertisingRows": 1,
+      "author": {
+        "name": "Participant_35",
+        "user_id": "user_36",
+        "ip": null,
+        "identitySufficient": true,
+        "matchingRowIds": []
+      }
+    },
+    {
+      "fixture": "mini-page1.json",
+      "kind": "MI",
+      "sourceUrl": "https://gall.dcinside.com/mini/board/view/?id=compliment&no=33",
+      "sourceSha256": "e28da51d758c4e6ff436b2b6f8598337d5ed406cb9febd304a46b541d9e84a3b",
+      "fixtureSha256": "a942487b6e03417cdcb8f73d3a07dd34e79ae51718ebdf18c42b22640acc7fff",
+      "fixtureArticleNo": 9002,
+      "rawRows": 1,
+      "totalCount": 1,
+      "deletedRows": 0,
+      "advertisingRows": 0,
+      "author": {
+        "name": "Participant_2",
+        "user_id": "",
+        "ip": null,
+        "identitySufficient": false,
+        "matchingRowIds": []
+      }
+    },
+    {
+      "fixture": "person-page1.json",
+      "kind": "PR",
+      "sourceUrl": "https://gall.dcinside.com/person/board/view/?id=samrorong&no=1157",
+      "sourceSha256": "9dd0efc5cf8bcef4df7c87f5961860aa7c1be9fe419c67920a14e880e2b1b110",
+      "fixtureSha256": "e331ca9522476598bc98ad0cdbc78c6d602f1b5c9332257b094c6a024c98b4bc",
+      "fixtureArticleNo": 9003,
+      "rawRows": 13,
+      "totalCount": 10,
+      "deletedRows": 1,
+      "advertisingRows": 2,
+      "author": {
+        "name": "Participant_2",
+        "user_id": "user_14",
+        "ip": null,
+        "identitySufficient": true,
+        "matchingRowIds": [
+          "1020",
+          "1023",
+          "1027",
+          "1028"
+        ]
+      }
+    },
+    {
+      "fixture": "general-extra-page1.json",
+      "kind": "G",
+      "sourceUrl": "https://gall.dcinside.com/board/view/?id=tree&no=1018758",
+      "sourceSha256": "3985fe39b4c4998b88d6a6e3f3427da543c6365fa8d38ea02fa07e46379282be",
+      "fixtureSha256": "3932d1e9698278513d8229270b48c20e9ce34ef1697bdabd692bbb3a3a01e88a",
+      "fixtureArticleNo": 9004,
+      "rawRows": 23,
+      "totalCount": 20,
+      "deletedRows": 0,
+      "advertisingRows": 3,
+      "author": null
+    },
+    {
+      "fixture": "minor-extra-page1.json",
+      "kind": "M",
+      "sourceUrl": "https://gall.dcinside.com/mgallery/board/view/?id=mechanicalkeyboard&no=2687450",
+      "sourceSha256": "7baeb978164eee0fa66856c7964d39ff11f126d325fe2fce09018e7cd0d64022",
+      "fixtureSha256": "c9dd684a48be26e287ded6919c629a83456549150e0a4527de3bce13fcb19e2a",
+      "fixtureArticleNo": 9005,
+      "rawRows": 22,
+      "totalCount": 18,
+      "deletedRows": 1,
+      "advertisingRows": 3,
+      "author": null
+    },
+    {
+      "fixture": "general-unbadged-page1.json",
+      "kind": "G",
+      "sourceUrl": "https://gall.dcinside.com/board/view/?id=tree&no=1019133",
+      "sourceSha256": "cf2f573329a7a320116bb6636c51686eafeb789471b32402d4e5b190f5967fae",
+      "fixtureSha256": "a0667e53287dada5d8c6162542a1a88c62260640963e3c537d2d46d96474a44f",
+      "fixtureArticleNo": 9006,
+      "rawRows": 2,
+      "totalCount": 2,
+      "deletedRows": 0,
+      "advertisingRows": 0,
+      "author": null
+    },
+    {
+      "fixture": "mini-zero-page1.json",
+      "kind": "MI",
+      "sourceUrl": "https://gall.dcinside.com/mini/board/view/?id=compliment&no=72523",
+      "sourceSha256": "0f4723d5f7f19c071b52ab934b6ace550b927ac6af80129d5db47a56875042b6",
+      "fixtureSha256": "03c5a5c7f0e6c773e6d6a720c5d6e294897f8b3afa070674af57d1f6135a8a15",
+      "fixtureArticleNo": 9007,
+      "rawRows": 0,
+      "totalCount": 0,
+      "deletedRows": 0,
+      "advertisingRows": 0,
+      "author": null
+    },
+    {
+      "fixture": "general-after-last-page.json",
+      "kind": "G",
+      "sourceUrl": "https://gall.dcinside.com/board/view/?id=tree&no=1019123",
+      "sourceSha256": "d792a6a8e4666a783bcc13f4ef53c146b1413dcdb7be604b19fae8a2f49c8e27",
+      "fixtureSha256": "43832b1b5777c233229c4ec0d37617b439968ffe20377c01be6f1a1c066c1b47",
+      "requestedPage": 2
+    }
+  ]
+}

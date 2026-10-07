@@ -1,0 +1,10 @@
+{
+  "protocolVersion": 1,
+  "backendSessionId": "session-fixture",
+  "occurredAt": "2026-10-06T05:00:00Z",
+  "ok": true,
+  "data": {
+    "operations": [],
+    "cursor": null
+  }
+}

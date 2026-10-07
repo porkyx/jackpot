@@ -1,0 +1,54 @@
+# Local project documentation
+/docs/
+
+# Windows metadata and local IDE state
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+[Dd]esktop.ini
+$RECYCLE.BIN/
+*.lnk
+.vs/
+*.suo
+*.user
+
+# macOS metadata
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100/
+.Trashes/
+.fseventsd/
+.TemporaryItems/
+.DocumentRevisions-V100/
+.apdisk
+
+# Dependencies, generated output, and test reports
+node_modules/
+/frontend/dist/
+/bin/
+/dist/
+/.task/
+/coverage/
+/frontend/coverage/
+/frontend/coverage-*/
+/frontend/.task/
+/test-results/
+/playwright-report/
+/frontend/test-results/
+/frontend/playwright-report/
+*.test
+*.test.exe
+*.tsbuildinfo
+
+# Local environment, logs, and editor temporary files
+.env
+.env.*
+!.env.example
+!.env.*.example
+*.log
+*.swp
+*.swo
+*~

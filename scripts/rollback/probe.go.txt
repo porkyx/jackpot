@@ -1,0 +1,73 @@
+package main
+import(
+ "context"
+ "database/sql"
+ "encoding/json"
+ "errors"
+ "flag"
+ "fmt"
+ "net/url"
+ "os"
+ "path/filepath"
+ "runtime"
+ "strings"
+ "time"
+ "github.com/porkyx/jackpot/internal/storage/sqlite"
+)
+type report struct{
+ Build string `json:"build"`
+ Commit string `json:"commit"`
+ Go string `json:"go"`
+ SchemaVersion int `json:"schemaVersion"`
+ UserVersion int `json:"userVersion"`
+ Marker string `json:"marker"`
+ OperationCount int `json:"operationCount"`
+ Sequence int `json:"sequence"`
+ Integrity string `json:"integrity"`
+ ForeignKeyViolations int `json:"foreignKeyViolations"`
+ Backup string `json:"backup"`
+}
+func uri(path string)string{
+ value:=filepath.ToSlash(path)
+ if !strings.HasPrefix(value,"/"){value="/"+value}
+ return (&url.URL{Scheme:"file",Path:value}).String()
+}
+func run(mode,path string)(result report,err error){
+ result=report{Build:"@@LABEL@@",Commit:"@@COMMIT@@",Go:runtime.Version(),SchemaVersion:sqlite.SchemaVersion}
+ if !filepath.IsAbs(path){return result,errors.New("absolute owned path required")}
+ ctx,cancel:=context.WithTimeout(context.Background(),30*time.Second);defer cancel()
+ if mode!="inspect"{
+  store,openErr:=sqlite.Open(ctx,path)
+  if openErr!=nil{return result,openErr}
+  result.Backup,err=store.Migrate(ctx)
+  err=errors.Join(err,store.Close())
+  if err!=nil{return result,err}
+ }
+ if mode=="seed"{
+  if sqlite.SchemaVersion!=1{return result,errors.New("only historical schema1 may seed")}
+  db,openErr:=sql.Open("sqlite",uri(path));if openErr!=nil{return result,openErr}
+  _,err=db.ExecContext(ctx,`CREATE TABLE legacy(value TEXT NOT NULL); INSERT INTO legacy VALUES ('rollback 한글 preserved'); INSERT INTO operations(creation_key,operation_id,kind,collection_id,round_id,status,revision,public_fingerprint) VALUES(7,'deleted-original','CreateCollection','old','old','pending',0,zeroblob(32)); DELETE FROM operations;`)
+  err=errors.Join(err,db.Close());if err!=nil{return result,err}
+ }
+ db,err:=sql.Open("sqlite",uri(path)+"?mode=ro");if err!=nil{return result,err}
+ defer func(){err=errors.Join(err,db.Close())}()
+ tx,err:=db.BeginTx(ctx,&sql.TxOptions{ReadOnly:true});if err!=nil{return result,err}
+ defer tx.Rollback()
+ for _,query:=range []struct{text string;target any}{
+  {"PRAGMA user_version",&result.UserVersion},{"SELECT value FROM legacy",&result.Marker},{"SELECT count(*) FROM operations",&result.OperationCount},{"SELECT seq FROM sqlite_sequence WHERE name='operations'",&result.Sequence},{"PRAGMA integrity_check",&result.Integrity},
+ }{if err=tx.QueryRowContext(ctx,query.text).Scan(query.target);err!=nil{return result,err}}
+ rows,err:=tx.QueryContext(ctx,"PRAGMA foreign_key_check");if err!=nil{return result,err}
+ for rows.Next(){result.ForeignKeyViolations++}
+ err=errors.Join(rows.Err(),rows.Close());if err!=nil{return result,err}
+ if err=tx.Commit();err!=nil{return result,err}
+ return result,nil
+}
+func main(){
+ mode:=flag.String("mode","inspect","seed/migrate/resume/inspect")
+ path:=flag.String("path","","absolute owned database")
+ flag.Parse()
+ if *mode!="seed" && *mode!="migrate" && *mode!="resume" && *mode!="inspect"{fmt.Fprintln(os.Stderr,"unknown mode");os.Exit(2)}
+ result,err:=run(*mode,*path)
+ if err!=nil{fmt.Fprintln(os.Stderr,err);os.Exit(1)}
+ if err=json.NewEncoder(os.Stdout).Encode(result);err!=nil{fmt.Fprintln(os.Stderr,err);os.Exit(1)}
+}

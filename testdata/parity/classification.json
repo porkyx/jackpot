@@ -1,0 +1,2675 @@
+{
+  "observedAt": "2026-10-06",
+  "level": "public-client-model-on-synthetic-input",
+  "source": "https://dclottery.net/assets/es-Cr2bzqFj.js",
+  "sourceSha256": "2DC3149B19098BA37DE016D93E0F7E7888B32BC968F19A5E4457C25FB2B5D500",
+  "questions": [
+    "Q02"
+  ],
+  "decisions": [
+    "D03",
+    "D07"
+  ],
+  "limitations": "Isolated inspected pure model, MobX no-op, identity string instead of MD5. This is not real UI/server/raw DCInside mapping proof. No original model/bundle code is copied into fixture or product.",
+  "cases": [
+    {
+      "id": "default-manual-included",
+      "comments": [
+        {
+          "user": {
+            "name": "Participant_A",
+            "userId": "user_a",
+            "ip": "",
+            "memberIcon": 1
+          },
+          "body": "fixture",
+          "type": "text",
+          "time": "2026-10-06T03:30:00Z",
+          "index": 1
+        }
+      ],
+      "observed": {
+        "participantCount": 1,
+        "hasAuthorHash": false,
+        "entries": [
+          {
+            "name": "Participant_A",
+            "userId": "user_a",
+            "memberType": 1,
+            "automatic": "unclassified",
+            "reason": null,
+            "finalIncluded": true,
+            "comments": [
+              {
+                "body": "fixture",
+                "type": "text",
+                "index": 1
+              }
+            ]
+          }
+        ]
+      },
+      "trace": [
+        {
+          "participantCount": 1,
+          "hasAuthorHash": false,
+          "entries": [
+            {
+              "name": "Participant_A",
+              "userId": "user_a",
+              "memberType": 1,
+              "automatic": "unclassified",
+              "reason": null,
+              "finalIncluded": true,
+              "comments": [
+                {
+                  "body": "fixture",
+                  "type": "text",
+                  "index": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "unregistered-only",
+      "comments": [
+        {
+          "user": {
+            "name": "Participant_A",
+            "userId": "",
+            "ip": "198.1",
+            "memberIcon": 3
+          },
+          "body": "fixture",
+          "type": "text",
+          "time": "2026-10-06T03:30:00Z",
+          "index": 1
+        }
+      ],
+      "filter": {
+        "excludeUnregistered": true
+      },
+      "observed": {
+        "participantCount": 1,
+        "hasAuthorHash": false,
+        "entries": [
+          {
+            "name": "Participant_A",
+            "userId": "198.1",
+            "memberType": 3,
+            "automatic": "excluded",
+            "reason": "유동",
+            "finalIncluded": false,
+            "comments": [
+              {
+                "body": "fixture",
+                "type": "text",
+                "index": 1
+              }
+            ]
+          }
+        ]
+      },
+      "trace": [
+        {
+          "participantCount": 1,
+          "hasAuthorHash": false,
+          "entries": [
+            {
+              "name": "Participant_A",
+              "userId": "198.1",
+              "memberType": 3,
+              "automatic": "excluded",
+              "reason": "유동",
+              "finalIncluded": false,
+              "comments": [
+                {
+                  "body": "fixture",
+                  "type": "text",
+                  "index": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "author-only",
+      "comments": [
+        {
+          "user": {
+            "name": "Participant_A",
+            "userId": "user_a",
+            "ip": "",
+            "memberIcon": 1
+          },
+          "body": "fixture",
+          "type": "text",
+          "time": "2026-10-06T03:30:00Z",
+          "index": 1
+        }
+      ],
+      "authorAfterParse": {
+        "name": "Participant_A",
+        "userId": "user_a",
+        "ip": "",
+        "memberIcon": 1
+      },
+      "observed": {
+        "participantCount": 1,
+        "hasAuthorHash": true,
+        "entries": [
+          {
+            "name": "Participant_A",
+            "userId": "user_a",
+            "memberType": 1,
+            "automatic": "excluded",
+            "reason": "작성자",
+            "finalIncluded": false,
+            "comments": [
+              {
+                "body": "fixture",
+                "type": "text",
+                "index": 1
+              }
+            ]
+          }
+        ]
+      },
+      "trace": [
+        {
+          "participantCount": 1,
+          "hasAuthorHash": true,
+          "entries": [
+            {
+              "name": "Participant_A",
+              "userId": "user_a",
+              "memberType": 1,
+              "automatic": "excluded",
+              "reason": "작성자",
+              "finalIncluded": false,
+              "comments": [
+                {
+                  "body": "fixture",
+                  "type": "text",
+                  "index": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dccon-only",
+      "comments": [
+        {
+          "user": {
+            "name": "Participant_A",
+            "userId": "user_a",
+            "ip": "",
+            "memberIcon": 1
+          },
+          "body": "fixture image",
+          "type": "dccon",
+          "time": "2026-10-06T03:30:00Z",
+          "index": 1
+        }
+      ],
+      "filter": {
+        "excludeDccon": true
+      },
+      "observed": {
+        "participantCount": 1,
+        "hasAuthorHash": false,
+        "entries": [
+          {
+            "name": "Participant_A",
+            "userId": "user_a",
+            "memberType": 1,
+            "automatic": "excluded",
+            "reason": "디시콘",
+            "finalIncluded": false,
+            "comments": [
+              {
+                "body": "디시콘",
+                "type": "dccon",
+                "index": 1
+              }
+            ]
+          }
+        ]
+      },
+      "trace": [
+        {
+          "participantCount": 1,
+          "hasAuthorHash": false,
+          "entries": [
+            {
+              "name": "Participant_A",
+              "userId": "user_a",
+              "memberType": 1,
+              "automatic": "excluded",
+              "reason": "디시콘",
+              "finalIncluded": false,
+              "comments": [
+                {
+                  "body": "디시콘",
+                  "type": "dccon",
+                  "index": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mixed-dccon-and-text",
+      "comments": [
+        {
+          "user": {
+            "name": "Participant_A",
+            "userId": "user_a",
+            "ip": "",
+            "memberIcon": 1
+          },
+          "body": "fixture image",
+          "type": "dccon",
+          "time": "2026-10-06T03:30:00Z",
+          "index": 1
+        },
+        {
+          "user": {
+            "name": "Participant_A",
+            "userId": "user_a",
+            "ip": "",
+            "memberIcon": 1
+          },
+          "body": "fixture text",
+          "type": "text",
+          "time": "2026-10-06T03:30:00Z",
+          "index": 1
+        }
+      ],
+      "filter": {
+        "excludeDccon": true
+      },
+      "observed": {
+        "participantCount": 1,
+        "hasAuthorHash": false,
+        "entries": [
+          {
+            "name": "Participant_A",
+            "userId": "user_a",
+            "memberType": 1,
+            "automatic": "unclassified",
+            "reason": null,
+            "finalIncluded": true,
+            "comments": [
+              {
+                "body": "디시콘",
+                "type": "dccon",
+                "index": 1
+              },
+              {
+                "body": "fixture text",
+                "type": "text",
+                "index": 1
+              }
+            ]
+          }
+        ]
+      },
+      "trace": [
+        {
+          "participantCount": 1,
+          "hasAuthorHash": false,
+          "entries": [
+            {
+              "name": "Participant_A",
+              "userId": "user_a",
+              "memberType": 1,
+              "automatic": "unclassified",
+              "reason": null,
+              "finalIncluded": true,
+              "comments": [
+                {
+                  "body": "디시콘",
+                  "type": "dccon",
+                  "index": 1
+                },
+                {
+                  "body": "fixture text",
+                  "type": "text",
+                  "index": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cutoff-before-end",
+      "comments": [
+        {
+          "user": {
+            "name": "Participant_A",
+            "userId": "user_a",
+            "ip": "",
+            "memberIcon": 1
+          },
+          "body": "fixture",
+          "type": "text",
+          "time": "2026-10-06T03:30:59Z",
+          "index": 1
+        }
+      ],
+      "filter": {
+        "useTimeCut": true,
+        "cutTime": {
+          "day": 0,
+          "hour": 12,
+          "minute": 30
+        }
+      },
+      "observed": {
+        "participantCount": 1,
+        "hasAuthorHash": false,
+        "entries": [
+          {
+            "name": "Participant_A",
+            "userId": "user_a",
+            "memberType": 1,
+            "automatic": "unclassified",
+            "reason": null,
+            "finalIncluded": true,
+            "comments": [
+              {
+                "body": "fixture",
+                "type": "text",
+                "index": 1
+              }
+            ]
+          }
+        ]
+      },
+      "trace": [
+        {
+          "participantCount": 1,
+          "hasAuthorHash": false,
+          "entries": [
+            {
+              "name": "Participant_A",
+              "userId": "user_a",
+              "memberType": 1,
+              "automatic": "unclassified",
+              "reason": null,
+              "finalIncluded": true,
+              "comments": [
+                {
+                  "body": "fixture",
+                  "type": "text",
+                  "index": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cutoff-exact-end",
+      "comments": [
+        {
+          "user": {
+            "name": "Participant_A",
+            "userId": "user_a",
+            "ip": "",
+            "memberIcon": 1
+          },
+          "body": "fixture",
+          "type": "text",
+          "time": "2026-10-06T03:31:00Z",
+          "index": 1
+        }
+      ],
+      "filter": {
+        "useTimeCut": true,
+        "cutTime": {
+          "day": 0,
+          "hour": 12,
+          "minute": 30
+        }
+      },
+      "observed": {
+        "participantCount": 1,
+        "hasAuthorHash": false,
+        "entries": [
+          {
+            "name": "Participant_A",
+            "userId": "user_a",
+            "memberType": 1,
+            "automatic": "excluded",
+            "reason": "시간컷",
+            "finalIncluded": false,
+            "comments": [
+              {
+                "body": "fixture",
+                "type": "text",
+                "index": 1
+              }
+            ]
+          }
+        ]
+      },
+      "trace": [
+        {
+          "participantCount": 1,
+          "hasAuthorHash": false,
+          "entries": [
+            {
+              "name": "Participant_A",
+              "userId": "user_a",
+              "memberType": 1,
+              "automatic": "excluded",
+              "reason": "시간컷",
+              "finalIncluded": false,
+              "comments": [
+                {
+                  "body": "fixture",
+                  "type": "text",
+                  "index": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "one-before-cutoff",
+      "comments": [
+        {
+          "user": {
+            "name": "Participant_A",
+            "userId": "user_a",
+            "ip": "",
+            "memberIcon": 1
+          },
+          "body": "early",
+          "type": "text",
+          "time": "2026-10-06T03:30:59Z",
+          "index": 1
+        },
+        {
+          "user": {
+            "name": "Participant_A",
+            "userId": "user_a",
+            "ip": "",
+            "memberIcon": 1
+          },
+          "body": "late",
+          "type": "text",
+          "time": "2026-10-06T03:31:01Z",
+          "index": 1
+        }
+      ],
+      "filter": {
+        "useTimeCut": true,
+        "cutTime": {
+          "day": 0,
+          "hour": 12,
+          "minute": 30
+        }
+      },
+      "observed": {
+        "participantCount": 1,
+        "hasAuthorHash": false,
+        "entries": [
+          {
+            "name": "Participant_A",
+            "userId": "user_a",
+            "memberType": 1,
+            "automatic": "unclassified",
+            "reason": null,
+            "finalIncluded": true,
+            "comments": [
+              {
+                "body": "early",
+                "type": "text",
+                "index": 1
+              },
+              {
+                "body": "late",
+                "type": "text",
+                "index": 1
+              }
+            ]
+          }
+        ]
+      },
+      "trace": [
+        {
+          "participantCount": 1,
+          "hasAuthorHash": false,
+          "entries": [
+            {
+              "name": "Participant_A",
+              "userId": "user_a",
+              "memberType": 1,
+              "automatic": "unclassified",
+              "reason": null,
+              "finalIncluded": true,
+              "comments": [
+                {
+                  "body": "early",
+                  "type": "text",
+                  "index": 1
+                },
+                {
+                  "body": "late",
+                  "type": "text",
+                  "index": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "excluded-keyword",
+      "comments": [
+        {
+          "user": {
+            "name": "Participant_A",
+            "userId": "user_a",
+            "ip": "",
+            "memberIcon": 1
+          },
+          "body": "prefix BAN suffix",
+          "type": "text",
+          "time": "2026-10-06T03:30:00Z",
+          "index": 1
+        }
+      ],
+      "filter": {
+        "excludedKeyword": [
+          "BAN"
+        ]
+      },
+      "observed": {
+        "participantCount": 1,
+        "hasAuthorHash": false,
+        "entries": [
+          {
+            "name": "Participant_A",
+            "userId": "user_a",
+            "memberType": 1,
+            "automatic": "excluded",
+            "reason": "단어제외",
+            "finalIncluded": false,
+            "comments": [
+              {
+                "body": "prefix BAN suffix",
+                "type": "text",
+                "index": 1
+              }
+            ]
+          }
+        ]
+      },
+      "trace": [
+        {
+          "participantCount": 1,
+          "hasAuthorHash": false,
+          "entries": [
+            {
+              "name": "Participant_A",
+              "userId": "user_a",
+              "memberType": 1,
+              "automatic": "excluded",
+              "reason": "단어제외",
+              "finalIncluded": false,
+              "comments": [
+                {
+                  "body": "prefix BAN suffix",
+                  "type": "text",
+                  "index": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "included-keyword",
+      "comments": [
+        {
+          "user": {
+            "name": "Participant_A",
+            "userId": "user_a",
+            "ip": "",
+            "memberIcon": 1
+          },
+          "body": "prefix JOIN suffix",
+          "type": "text",
+          "time": "2026-10-06T03:30:00Z",
+          "index": 1
+        }
+      ],
+      "filter": {
+        "includedKeyword": [
+          "JOIN"
+        ]
+      },
+      "observed": {
+        "participantCount": 1,
+        "hasAuthorHash": false,
+        "entries": [
+          {
+            "name": "Participant_A",
+            "userId": "user_a",
+            "memberType": 1,
+            "automatic": "included",
+            "reason": "단어포함",
+            "finalIncluded": true,
+            "comments": [
+              {
+                "body": "prefix JOIN suffix",
+                "type": "text",
+                "index": 1
+              }
+            ]
+          }
+        ]
+      },
+      "trace": [
+        {
+          "participantCount": 1,
+          "hasAuthorHash": false,
+          "entries": [
+            {
+              "name": "Participant_A",
+              "userId": "user_a",
+              "memberType": 1,
+              "automatic": "included",
+              "reason": "단어포함",
+              "finalIncluded": true,
+              "comments": [
+                {
+                  "body": "prefix JOIN suffix",
+                  "type": "text",
+                  "index": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "included-keyword-miss-is-manual",
+      "comments": [
+        {
+          "user": {
+            "name": "Participant_A",
+            "userId": "user_a",
+            "ip": "",
+            "memberIcon": 1
+          },
+          "body": "unrelated",
+          "type": "text",
+          "time": "2026-10-06T03:30:00Z",
+          "index": 1
+        }
+      ],
+      "filter": {
+        "includedKeyword": [
+          "JOIN"
+        ]
+      },
+      "observed": {
+        "participantCount": 1,
+        "hasAuthorHash": false,
+        "entries": [
+          {
+            "name": "Participant_A",
+            "userId": "user_a",
+            "memberType": 1,
+            "automatic": "unclassified",
+            "reason": null,
+            "finalIncluded": true,
+            "comments": [
+              {
+                "body": "unrelated",
+                "type": "text",
+                "index": 1
+              }
+            ]
+          }
+        ]
+      },
+      "trace": [
+        {
+          "participantCount": 1,
+          "hasAuthorHash": false,
+          "entries": [
+            {
+              "name": "Participant_A",
+              "userId": "user_a",
+              "memberType": 1,
+              "automatic": "unclassified",
+              "reason": null,
+              "finalIncluded": true,
+              "comments": [
+                {
+                  "body": "unrelated",
+                  "type": "text",
+                  "index": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "case-sensitive-keyword",
+      "comments": [
+        {
+          "user": {
+            "name": "Participant_A",
+            "userId": "user_a",
+            "ip": "",
+            "memberIcon": 1
+          },
+          "body": "Join",
+          "type": "text",
+          "time": "2026-10-06T03:30:00Z",
+          "index": 1
+        }
+      ],
+      "filter": {
+        "includedKeyword": [
+          "JOIN"
+        ]
+      },
+      "observed": {
+        "participantCount": 1,
+        "hasAuthorHash": false,
+        "entries": [
+          {
+            "name": "Participant_A",
+            "userId": "user_a",
+            "memberType": 1,
+            "automatic": "unclassified",
+            "reason": null,
+            "finalIncluded": true,
+            "comments": [
+              {
+                "body": "Join",
+                "type": "text",
+                "index": 1
+              }
+            ]
+          }
+        ]
+      },
+      "trace": [
+        {
+          "participantCount": 1,
+          "hasAuthorHash": false,
+          "entries": [
+            {
+              "name": "Participant_A",
+              "userId": "user_a",
+              "memberType": 1,
+              "automatic": "unclassified",
+              "reason": null,
+              "finalIncluded": true,
+              "comments": [
+                {
+                  "body": "Join",
+                  "type": "text",
+                  "index": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "keyword-or",
+      "comments": [
+        {
+          "user": {
+            "name": "Participant_A",
+            "userId": "user_a",
+            "ip": "",
+            "memberIcon": 1
+          },
+          "body": "JOIN",
+          "type": "text",
+          "time": "2026-10-06T03:30:00Z",
+          "index": 1
+        }
+      ],
+      "filter": {
+        "includedKeyword": [
+          "MISS",
+          "JOIN"
+        ]
+      },
+      "observed": {
+        "participantCount": 1,
+        "hasAuthorHash": false,
+        "entries": [
+          {
+            "name": "Participant_A",
+            "userId": "user_a",
+            "memberType": 1,
+            "automatic": "included",
+            "reason": "단어포함",
+            "finalIncluded": true,
+            "comments": [
+              {
+                "body": "JOIN",
+                "type": "text",
+                "index": 1
+              }
+            ]
+          }
+        ]
+      },
+      "trace": [
+        {
+          "participantCount": 1,
+          "hasAuthorHash": false,
+          "entries": [
+            {
+              "name": "Participant_A",
+              "userId": "user_a",
+              "memberType": 1,
+              "automatic": "included",
+              "reason": "단어포함",
+              "finalIncluded": true,
+              "comments": [
+                {
+                  "body": "JOIN",
+                  "type": "text",
+                  "index": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "priority-unregistered-before-all",
+      "comments": [
+        {
+          "user": {
+            "name": "Participant_A",
+            "userId": "",
+            "ip": "198.1",
+            "memberIcon": 3
+          },
+          "body": "fixture",
+          "type": "dccon",
+          "time": "2026-10-06T03:31:00Z",
+          "index": 1
+        }
+      ],
+      "authorAfterParse": {
+        "name": "Participant_A",
+        "userId": "",
+        "ip": "198.1",
+        "memberIcon": 3
+      },
+      "filter": {
+        "excludeUnregistered": true,
+        "excludeDccon": true,
+        "useTimeCut": true,
+        "cutTime": {
+          "day": 0,
+          "hour": 12,
+          "minute": 30
+        },
+        "excludedKeyword": [
+          "디시콘"
+        ],
+        "includedKeyword": [
+          "디시콘"
+        ]
+      },
+      "observed": {
+        "participantCount": 1,
+        "hasAuthorHash": true,
+        "entries": [
+          {
+            "name": "Participant_A",
+            "userId": "198.1",
+            "memberType": 3,
+            "automatic": "excluded",
+            "reason": "유동",
+            "finalIncluded": false,
+            "comments": [
+              {
+                "body": "디시콘",
+                "type": "dccon",
+                "index": 1
+              }
+            ]
+          }
+        ]
+      },
+      "trace": [
+        {
+          "participantCount": 1,
+          "hasAuthorHash": true,
+          "entries": [
+            {
+              "name": "Participant_A",
+              "userId": "198.1",
+              "memberType": 3,
+              "automatic": "excluded",
+              "reason": "유동",
+              "finalIncluded": false,
+              "comments": [
+                {
+                  "body": "디시콘",
+                  "type": "dccon",
+                  "index": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "priority-author-before-dccon",
+      "comments": [
+        {
+          "user": {
+            "name": "Participant_A",
+            "userId": "user_a",
+            "ip": "",
+            "memberIcon": 1
+          },
+          "body": "fixture",
+          "type": "dccon",
+          "time": "2026-10-06T03:30:00Z",
+          "index": 1
+        }
+      ],
+      "authorAfterParse": {
+        "name": "Participant_A",
+        "userId": "user_a",
+        "ip": "",
+        "memberIcon": 1
+      },
+      "filter": {
+        "excludeDccon": true,
+        "useTimeCut": true,
+        "cutTime": {
+          "day": 0,
+          "hour": 12,
+          "minute": 30
+        }
+      },
+      "observed": {
+        "participantCount": 1,
+        "hasAuthorHash": true,
+        "entries": [
+          {
+            "name": "Participant_A",
+            "userId": "user_a",
+            "memberType": 1,
+            "automatic": "excluded",
+            "reason": "작성자",
+            "finalIncluded": false,
+            "comments": [
+              {
+                "body": "디시콘",
+                "type": "dccon",
+                "index": 1
+              }
+            ]
+          }
+        ]
+      },
+      "trace": [
+        {
+          "participantCount": 1,
+          "hasAuthorHash": true,
+          "entries": [
+            {
+              "name": "Participant_A",
+              "userId": "user_a",
+              "memberType": 1,
+              "automatic": "excluded",
+              "reason": "작성자",
+              "finalIncluded": false,
+              "comments": [
+                {
+                  "body": "디시콘",
+                  "type": "dccon",
+                  "index": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "priority-dccon-before-cutoff",
+      "comments": [
+        {
+          "user": {
+            "name": "Participant_A",
+            "userId": "user_a",
+            "ip": "",
+            "memberIcon": 1
+          },
+          "body": "fixture",
+          "type": "dccon",
+          "time": "2026-10-06T03:31:00Z",
+          "index": 1
+        }
+      ],
+      "filter": {
+        "excludeDccon": true,
+        "useTimeCut": true,
+        "cutTime": {
+          "day": 0,
+          "hour": 12,
+          "minute": 30
+        },
+        "excludedKeyword": [
+          "디시콘"
+        ]
+      },
+      "observed": {
+        "participantCount": 1,
+        "hasAuthorHash": false,
+        "entries": [
+          {
+            "name": "Participant_A",
+            "userId": "user_a",
+            "memberType": 1,
+            "automatic": "excluded",
+            "reason": "디시콘",
+            "finalIncluded": false,
+            "comments": [
+              {
+                "body": "디시콘",
+                "type": "dccon",
+                "index": 1
+              }
+            ]
+          }
+        ]
+      },
+      "trace": [
+        {
+          "participantCount": 1,
+          "hasAuthorHash": false,
+          "entries": [
+            {
+              "name": "Participant_A",
+              "userId": "user_a",
+              "memberType": 1,
+              "automatic": "excluded",
+              "reason": "디시콘",
+              "finalIncluded": false,
+              "comments": [
+                {
+                  "body": "디시콘",
+                  "type": "dccon",
+                  "index": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "priority-cutoff-before-keyword",
+      "comments": [
+        {
+          "user": {
+            "name": "Participant_A",
+            "userId": "user_a",
+            "ip": "",
+            "memberIcon": 1
+          },
+          "body": "BAN JOIN",
+          "type": "text",
+          "time": "2026-10-06T03:31:00Z",
+          "index": 1
+        }
+      ],
+      "filter": {
+        "useTimeCut": true,
+        "cutTime": {
+          "day": 0,
+          "hour": 12,
+          "minute": 30
+        },
+        "excludedKeyword": [
+          "BAN"
+        ],
+        "includedKeyword": [
+          "JOIN"
+        ]
+      },
+      "observed": {
+        "participantCount": 1,
+        "hasAuthorHash": false,
+        "entries": [
+          {
+            "name": "Participant_A",
+            "userId": "user_a",
+            "memberType": 1,
+            "automatic": "excluded",
+            "reason": "시간컷",
+            "finalIncluded": false,
+            "comments": [
+              {
+                "body": "BAN JOIN",
+                "type": "text",
+                "index": 1
+              }
+            ]
+          }
+        ]
+      },
+      "trace": [
+        {
+          "participantCount": 1,
+          "hasAuthorHash": false,
+          "entries": [
+            {
+              "name": "Participant_A",
+              "userId": "user_a",
+              "memberType": 1,
+              "automatic": "excluded",
+              "reason": "시간컷",
+              "finalIncluded": false,
+              "comments": [
+                {
+                  "body": "BAN JOIN",
+                  "type": "text",
+                  "index": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "priority-exclude-before-include",
+      "comments": [
+        {
+          "user": {
+            "name": "Participant_A",
+            "userId": "user_a",
+            "ip": "",
+            "memberIcon": 1
+          },
+          "body": "BAN JOIN",
+          "type": "text",
+          "time": "2026-10-06T03:30:00Z",
+          "index": 1
+        }
+      ],
+      "filter": {
+        "excludedKeyword": [
+          "BAN"
+        ],
+        "includedKeyword": [
+          "JOIN"
+        ]
+      },
+      "observed": {
+        "participantCount": 1,
+        "hasAuthorHash": false,
+        "entries": [
+          {
+            "name": "Participant_A",
+            "userId": "user_a",
+            "memberType": 1,
+            "automatic": "excluded",
+            "reason": "단어제외",
+            "finalIncluded": false,
+            "comments": [
+              {
+                "body": "BAN JOIN",
+                "type": "text",
+                "index": 1
+              }
+            ]
+          }
+        ]
+      },
+      "trace": [
+        {
+          "participantCount": 1,
+          "hasAuthorHash": false,
+          "entries": [
+            {
+              "name": "Participant_A",
+              "userId": "user_a",
+              "memberType": 1,
+              "automatic": "excluded",
+              "reason": "단어제외",
+              "finalIncluded": false,
+              "comments": [
+                {
+                  "body": "BAN JOIN",
+                  "type": "text",
+                  "index": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "keywords-see-comments-after-cutoff",
+      "comments": [
+        {
+          "user": {
+            "name": "Participant_A",
+            "userId": "user_a",
+            "ip": "",
+            "memberIcon": 1
+          },
+          "body": "early",
+          "type": "text",
+          "time": "2026-10-06T03:30:00Z",
+          "index": 1
+        },
+        {
+          "user": {
+            "name": "Participant_A",
+            "userId": "user_a",
+            "ip": "",
+            "memberIcon": 1
+          },
+          "body": "BAN",
+          "type": "text",
+          "time": "2026-10-06T03:31:00Z",
+          "index": 1
+        }
+      ],
+      "filter": {
+        "useTimeCut": true,
+        "cutTime": {
+          "day": 0,
+          "hour": 12,
+          "minute": 30
+        },
+        "excludedKeyword": [
+          "BAN"
+        ]
+      },
+      "observed": {
+        "participantCount": 1,
+        "hasAuthorHash": false,
+        "entries": [
+          {
+            "name": "Participant_A",
+            "userId": "user_a",
+            "memberType": 1,
+            "automatic": "excluded",
+            "reason": "단어제외",
+            "finalIncluded": false,
+            "comments": [
+              {
+                "body": "early",
+                "type": "text",
+                "index": 1
+              },
+              {
+                "body": "BAN",
+                "type": "text",
+                "index": 1
+              }
+            ]
+          }
+        ]
+      },
+      "trace": [
+        {
+          "participantCount": 1,
+          "hasAuthorHash": false,
+          "entries": [
+            {
+              "name": "Participant_A",
+              "userId": "user_a",
+              "memberType": 1,
+              "automatic": "excluded",
+              "reason": "단어제외",
+              "finalIncluded": false,
+              "comments": [
+                {
+                  "body": "early",
+                  "type": "text",
+                  "index": 1
+                },
+                {
+                  "body": "BAN",
+                  "type": "text",
+                  "index": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "same-user-and-name-one-participant",
+      "comments": [
+        {
+          "user": {
+            "name": "Participant_A",
+            "userId": "user_a",
+            "ip": "",
+            "memberIcon": 1
+          },
+          "body": "first",
+          "type": "text",
+          "time": "2026-10-06T03:30:00Z",
+          "index": 1
+        },
+        {
+          "user": {
+            "name": "Participant_A",
+            "userId": "user_a",
+            "ip": "",
+            "memberIcon": 1
+          },
+          "body": "second",
+          "type": "text",
+          "time": "2026-10-06T03:30:00Z",
+          "index": 1
+        }
+      ],
+      "observed": {
+        "participantCount": 1,
+        "hasAuthorHash": false,
+        "entries": [
+          {
+            "name": "Participant_A",
+            "userId": "user_a",
+            "memberType": 1,
+            "automatic": "unclassified",
+            "reason": null,
+            "finalIncluded": true,
+            "comments": [
+              {
+                "body": "first",
+                "type": "text",
+                "index": 1
+              },
+              {
+                "body": "second",
+                "type": "text",
+                "index": 1
+              }
+            ]
+          }
+        ]
+      },
+      "trace": [
+        {
+          "participantCount": 1,
+          "hasAuthorHash": false,
+          "entries": [
+            {
+              "name": "Participant_A",
+              "userId": "user_a",
+              "memberType": 1,
+              "automatic": "unclassified",
+              "reason": null,
+              "finalIncluded": true,
+              "comments": [
+                {
+                  "body": "first",
+                  "type": "text",
+                  "index": 1
+                },
+                {
+                  "body": "second",
+                  "type": "text",
+                  "index": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "renamed-user-separate-participants",
+      "comments": [
+        {
+          "user": {
+            "name": "Participant_A",
+            "userId": "user_a",
+            "ip": "",
+            "memberIcon": 1
+          },
+          "body": "first",
+          "type": "text",
+          "time": "2026-10-06T03:30:00Z",
+          "index": 1
+        },
+        {
+          "user": {
+            "name": "Participant_B",
+            "userId": "user_a",
+            "ip": "",
+            "memberIcon": 1
+          },
+          "body": "second",
+          "type": "text",
+          "time": "2026-10-06T03:30:00Z",
+          "index": 1
+        }
+      ],
+      "observed": {
+        "participantCount": 2,
+        "hasAuthorHash": false,
+        "entries": [
+          {
+            "name": "Participant_A",
+            "userId": "user_a",
+            "memberType": 1,
+            "automatic": "unclassified",
+            "reason": null,
+            "finalIncluded": true,
+            "comments": [
+              {
+                "body": "first",
+                "type": "text",
+                "index": 1
+              }
+            ]
+          },
+          {
+            "name": "Participant_B",
+            "userId": "user_a",
+            "memberType": 1,
+            "automatic": "unclassified",
+            "reason": null,
+            "finalIncluded": true,
+            "comments": [
+              {
+                "body": "second",
+                "type": "text",
+                "index": 1
+              }
+            ]
+          }
+        ]
+      },
+      "trace": [
+        {
+          "participantCount": 2,
+          "hasAuthorHash": false,
+          "entries": [
+            {
+              "name": "Participant_A",
+              "userId": "user_a",
+              "memberType": 1,
+              "automatic": "unclassified",
+              "reason": null,
+              "finalIncluded": true,
+              "comments": [
+                {
+                  "body": "first",
+                  "type": "text",
+                  "index": 1
+                }
+              ]
+            },
+            {
+              "name": "Participant_B",
+              "userId": "user_a",
+              "memberType": 1,
+              "automatic": "unclassified",
+              "reason": null,
+              "finalIncluded": true,
+              "comments": [
+                {
+                  "body": "second",
+                  "type": "text",
+                  "index": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "same-name-different-user-separate",
+      "comments": [
+        {
+          "user": {
+            "name": "Participant_A",
+            "userId": "user_a",
+            "ip": "",
+            "memberIcon": 1
+          },
+          "body": "first",
+          "type": "text",
+          "time": "2026-10-06T03:30:00Z",
+          "index": 1
+        },
+        {
+          "user": {
+            "name": "Participant_A",
+            "userId": "user_b",
+            "ip": "",
+            "memberIcon": 1
+          },
+          "body": "second",
+          "type": "text",
+          "time": "2026-10-06T03:30:00Z",
+          "index": 1
+        }
+      ],
+      "observed": {
+        "participantCount": 2,
+        "hasAuthorHash": false,
+        "entries": [
+          {
+            "name": "Participant_A",
+            "userId": "user_a",
+            "memberType": 1,
+            "automatic": "unclassified",
+            "reason": null,
+            "finalIncluded": true,
+            "comments": [
+              {
+                "body": "first",
+                "type": "text",
+                "index": 1
+              }
+            ]
+          },
+          {
+            "name": "Participant_A",
+            "userId": "user_b",
+            "memberType": 1,
+            "automatic": "unclassified",
+            "reason": null,
+            "finalIncluded": true,
+            "comments": [
+              {
+                "body": "second",
+                "type": "text",
+                "index": 1
+              }
+            ]
+          }
+        ]
+      },
+      "trace": [
+        {
+          "participantCount": 2,
+          "hasAuthorHash": false,
+          "entries": [
+            {
+              "name": "Participant_A",
+              "userId": "user_a",
+              "memberType": 1,
+              "automatic": "unclassified",
+              "reason": null,
+              "finalIncluded": true,
+              "comments": [
+                {
+                  "body": "first",
+                  "type": "text",
+                  "index": 1
+                }
+              ]
+            },
+            {
+              "name": "Participant_A",
+              "userId": "user_b",
+              "memberType": 1,
+              "automatic": "unclassified",
+              "reason": null,
+              "finalIncluded": true,
+              "comments": [
+                {
+                  "body": "second",
+                  "type": "text",
+                  "index": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "same-name-different-ip-separate",
+      "comments": [
+        {
+          "user": {
+            "name": "Participant_A",
+            "userId": "",
+            "ip": "198.1",
+            "memberIcon": 3
+          },
+          "body": "first",
+          "type": "text",
+          "time": "2026-10-06T03:30:00Z",
+          "index": 1
+        },
+        {
+          "user": {
+            "name": "Participant_A",
+            "userId": "",
+            "ip": "198.2",
+            "memberIcon": 3
+          },
+          "body": "second",
+          "type": "text",
+          "time": "2026-10-06T03:30:00Z",
+          "index": 1
+        }
+      ],
+      "observed": {
+        "participantCount": 2,
+        "hasAuthorHash": false,
+        "entries": [
+          {
+            "name": "Participant_A",
+            "userId": "198.1",
+            "memberType": 3,
+            "automatic": "unclassified",
+            "reason": null,
+            "finalIncluded": true,
+            "comments": [
+              {
+                "body": "first",
+                "type": "text",
+                "index": 1
+              }
+            ]
+          },
+          {
+            "name": "Participant_A",
+            "userId": "198.2",
+            "memberType": 3,
+            "automatic": "unclassified",
+            "reason": null,
+            "finalIncluded": true,
+            "comments": [
+              {
+                "body": "second",
+                "type": "text",
+                "index": 1
+              }
+            ]
+          }
+        ]
+      },
+      "trace": [
+        {
+          "participantCount": 2,
+          "hasAuthorHash": false,
+          "entries": [
+            {
+              "name": "Participant_A",
+              "userId": "198.1",
+              "memberType": 3,
+              "automatic": "unclassified",
+              "reason": null,
+              "finalIncluded": true,
+              "comments": [
+                {
+                  "body": "first",
+                  "type": "text",
+                  "index": 1
+                }
+              ]
+            },
+            {
+              "name": "Participant_A",
+              "userId": "198.2",
+              "memberType": 3,
+              "automatic": "unclassified",
+              "reason": null,
+              "finalIncluded": true,
+              "comments": [
+                {
+                  "body": "second",
+                  "type": "text",
+                  "index": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "auto-include-manual-excluded",
+      "comments": [
+        {
+          "user": {
+            "name": "Participant_A",
+            "userId": "user_a",
+            "ip": "",
+            "memberIcon": 1
+          },
+          "body": "JOIN",
+          "type": "text",
+          "time": "2026-10-06T03:30:00Z",
+          "index": 1
+        }
+      ],
+      "filter": {
+        "includedKeyword": [
+          "JOIN"
+        ]
+      },
+      "steps": [
+        {
+          "action": "status",
+          "value": "excluded"
+        }
+      ],
+      "observed": {
+        "participantCount": 1,
+        "hasAuthorHash": false,
+        "entries": [
+          {
+            "name": "Participant_A",
+            "userId": "user_a",
+            "memberType": 1,
+            "automatic": "included",
+            "reason": "단어포함",
+            "finalIncluded": false,
+            "comments": [
+              {
+                "body": "JOIN",
+                "type": "text",
+                "index": 1
+              }
+            ]
+          }
+        ]
+      },
+      "trace": [
+        {
+          "participantCount": 1,
+          "hasAuthorHash": false,
+          "entries": [
+            {
+              "name": "Participant_A",
+              "userId": "user_a",
+              "memberType": 1,
+              "automatic": "included",
+              "reason": "단어포함",
+              "finalIncluded": true,
+              "comments": [
+                {
+                  "body": "JOIN",
+                  "type": "text",
+                  "index": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "participantCount": 1,
+          "hasAuthorHash": false,
+          "entries": [
+            {
+              "name": "Participant_A",
+              "userId": "user_a",
+              "memberType": 1,
+              "automatic": "included",
+              "reason": "단어포함",
+              "finalIncluded": false,
+              "comments": [
+                {
+                  "body": "JOIN",
+                  "type": "text",
+                  "index": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "auto-exclude-override-included",
+      "comments": [
+        {
+          "user": {
+            "name": "Participant_A",
+            "userId": "user_a",
+            "ip": "",
+            "memberIcon": 1
+          },
+          "body": "BAN",
+          "type": "text",
+          "time": "2026-10-06T03:30:00Z",
+          "index": 1
+        }
+      ],
+      "filter": {
+        "excludedKeyword": [
+          "BAN"
+        ]
+      },
+      "steps": [
+        {
+          "action": "status",
+          "value": "included"
+        }
+      ],
+      "observed": {
+        "participantCount": 1,
+        "hasAuthorHash": false,
+        "entries": [
+          {
+            "name": "Participant_A",
+            "userId": "user_a",
+            "memberType": 1,
+            "automatic": "excluded",
+            "reason": "단어제외",
+            "finalIncluded": true,
+            "comments": [
+              {
+                "body": "BAN",
+                "type": "text",
+                "index": 1
+              }
+            ]
+          }
+        ]
+      },
+      "trace": [
+        {
+          "participantCount": 1,
+          "hasAuthorHash": false,
+          "entries": [
+            {
+              "name": "Participant_A",
+              "userId": "user_a",
+              "memberType": 1,
+              "automatic": "excluded",
+              "reason": "단어제외",
+              "finalIncluded": false,
+              "comments": [
+                {
+                  "body": "BAN",
+                  "type": "text",
+                  "index": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "participantCount": 1,
+          "hasAuthorHash": false,
+          "entries": [
+            {
+              "name": "Participant_A",
+              "userId": "user_a",
+              "memberType": 1,
+              "automatic": "excluded",
+              "reason": "단어제외",
+              "finalIncluded": true,
+              "comments": [
+                {
+                  "body": "BAN",
+                  "type": "text",
+                  "index": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "manual-state-survives-filter-change",
+      "comments": [
+        {
+          "user": {
+            "name": "Participant_A",
+            "userId": "user_a",
+            "ip": "",
+            "memberIcon": 1
+          },
+          "body": "JOIN",
+          "type": "text",
+          "time": "2026-10-06T03:30:00Z",
+          "index": 1
+        }
+      ],
+      "steps": [
+        {
+          "action": "status",
+          "value": "excluded"
+        },
+        {
+          "action": "filter",
+          "value": {
+            "includedKeyword": [
+              "JOIN"
+            ]
+          }
+        }
+      ],
+      "observed": {
+        "participantCount": 1,
+        "hasAuthorHash": false,
+        "entries": [
+          {
+            "name": "Participant_A",
+            "userId": "user_a",
+            "memberType": 1,
+            "automatic": "included",
+            "reason": "단어포함",
+            "finalIncluded": false,
+            "comments": [
+              {
+                "body": "JOIN",
+                "type": "text",
+                "index": 1
+              }
+            ]
+          }
+        ]
+      },
+      "trace": [
+        {
+          "participantCount": 1,
+          "hasAuthorHash": false,
+          "entries": [
+            {
+              "name": "Participant_A",
+              "userId": "user_a",
+              "memberType": 1,
+              "automatic": "unclassified",
+              "reason": null,
+              "finalIncluded": true,
+              "comments": [
+                {
+                  "body": "JOIN",
+                  "type": "text",
+                  "index": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "participantCount": 1,
+          "hasAuthorHash": false,
+          "entries": [
+            {
+              "name": "Participant_A",
+              "userId": "user_a",
+              "memberType": 1,
+              "automatic": "unclassified",
+              "reason": null,
+              "finalIncluded": false,
+              "comments": [
+                {
+                  "body": "JOIN",
+                  "type": "text",
+                  "index": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "participantCount": 1,
+          "hasAuthorHash": false,
+          "entries": [
+            {
+              "name": "Participant_A",
+              "userId": "user_a",
+              "memberType": 1,
+              "automatic": "included",
+              "reason": "단어포함",
+              "finalIncluded": false,
+              "comments": [
+                {
+                  "body": "JOIN",
+                  "type": "text",
+                  "index": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "override-survives-filter-off-on",
+      "comments": [
+        {
+          "user": {
+            "name": "Participant_A",
+            "userId": "user_a",
+            "ip": "",
+            "memberIcon": 1
+          },
+          "body": "BAN",
+          "type": "text",
+          "time": "2026-10-06T03:30:00Z",
+          "index": 1
+        }
+      ],
+      "filter": {
+        "excludedKeyword": [
+          "BAN"
+        ]
+      },
+      "steps": [
+        {
+          "action": "status",
+          "value": "included"
+        },
+        {
+          "action": "filter",
+          "value": {
+            "excludedKeyword": []
+          }
+        },
+        {
+          "action": "filter",
+          "value": {
+            "excludedKeyword": [
+              "BAN"
+            ]
+          }
+        }
+      ],
+      "observed": {
+        "participantCount": 1,
+        "hasAuthorHash": false,
+        "entries": [
+          {
+            "name": "Participant_A",
+            "userId": "user_a",
+            "memberType": 1,
+            "automatic": "excluded",
+            "reason": "단어제외",
+            "finalIncluded": true,
+            "comments": [
+              {
+                "body": "BAN",
+                "type": "text",
+                "index": 1
+              }
+            ]
+          }
+        ]
+      },
+      "trace": [
+        {
+          "participantCount": 1,
+          "hasAuthorHash": false,
+          "entries": [
+            {
+              "name": "Participant_A",
+              "userId": "user_a",
+              "memberType": 1,
+              "automatic": "excluded",
+              "reason": "단어제외",
+              "finalIncluded": false,
+              "comments": [
+                {
+                  "body": "BAN",
+                  "type": "text",
+                  "index": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "participantCount": 1,
+          "hasAuthorHash": false,
+          "entries": [
+            {
+              "name": "Participant_A",
+              "userId": "user_a",
+              "memberType": 1,
+              "automatic": "excluded",
+              "reason": "단어제외",
+              "finalIncluded": true,
+              "comments": [
+                {
+                  "body": "BAN",
+                  "type": "text",
+                  "index": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "participantCount": 1,
+          "hasAuthorHash": false,
+          "entries": [
+            {
+              "name": "Participant_A",
+              "userId": "user_a",
+              "memberType": 1,
+              "automatic": "unclassified",
+              "reason": null,
+              "finalIncluded": true,
+              "comments": [
+                {
+                  "body": "BAN",
+                  "type": "text",
+                  "index": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "participantCount": 1,
+          "hasAuthorHash": false,
+          "entries": [
+            {
+              "name": "Participant_A",
+              "userId": "user_a",
+              "memberType": 1,
+              "automatic": "excluded",
+              "reason": "단어제외",
+              "finalIncluded": true,
+              "comments": [
+                {
+                  "body": "BAN",
+                  "type": "text",
+                  "index": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "reset-manual-keeps-auto-filter",
+      "comments": [
+        {
+          "user": {
+            "name": "Participant_A",
+            "userId": "user_a",
+            "ip": "",
+            "memberIcon": 1
+          },
+          "body": "BAN",
+          "type": "text",
+          "time": "2026-10-06T03:30:00Z",
+          "index": 1
+        }
+      ],
+      "filter": {
+        "excludedKeyword": [
+          "BAN"
+        ]
+      },
+      "steps": [
+        {
+          "action": "status",
+          "value": "included"
+        },
+        {
+          "action": "resetManual"
+        }
+      ],
+      "observed": {
+        "participantCount": 1,
+        "hasAuthorHash": false,
+        "entries": [
+          {
+            "name": "Participant_A",
+            "userId": "user_a",
+            "memberType": 1,
+            "automatic": "excluded",
+            "reason": "단어제외",
+            "finalIncluded": false,
+            "comments": [
+              {
+                "body": "BAN",
+                "type": "text",
+                "index": 1
+              }
+            ]
+          }
+        ]
+      },
+      "trace": [
+        {
+          "participantCount": 1,
+          "hasAuthorHash": false,
+          "entries": [
+            {
+              "name": "Participant_A",
+              "userId": "user_a",
+              "memberType": 1,
+              "automatic": "excluded",
+              "reason": "단어제외",
+              "finalIncluded": false,
+              "comments": [
+                {
+                  "body": "BAN",
+                  "type": "text",
+                  "index": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "participantCount": 1,
+          "hasAuthorHash": false,
+          "entries": [
+            {
+              "name": "Participant_A",
+              "userId": "user_a",
+              "memberType": 1,
+              "automatic": "excluded",
+              "reason": "단어제외",
+              "finalIncluded": true,
+              "comments": [
+                {
+                  "body": "BAN",
+                  "type": "text",
+                  "index": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "participantCount": 1,
+          "hasAuthorHash": false,
+          "entries": [
+            {
+              "name": "Participant_A",
+              "userId": "user_a",
+              "memberType": 1,
+              "automatic": "excluded",
+              "reason": "단어제외",
+              "finalIncluded": false,
+              "comments": [
+                {
+                  "body": "BAN",
+                  "type": "text",
+                  "index": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bulk-affects-only-unclassified",
+      "comments": [
+        {
+          "user": {
+            "name": "Participant_A",
+            "userId": "user_a",
+            "ip": "",
+            "memberIcon": 1
+          },
+          "body": "JOIN",
+          "type": "text",
+          "time": "2026-10-06T03:30:00Z",
+          "index": 1
+        },
+        {
+          "user": {
+            "name": "Participant_B",
+            "userId": "user_b",
+            "ip": "",
+            "memberIcon": 1
+          },
+          "body": "other",
+          "type": "text",
+          "time": "2026-10-06T03:30:00Z",
+          "index": 1
+        }
+      ],
+      "filter": {
+        "includedKeyword": [
+          "JOIN"
+        ]
+      },
+      "steps": [
+        {
+          "action": "bulk",
+          "value": "excluded"
+        }
+      ],
+      "observed": {
+        "participantCount": 2,
+        "hasAuthorHash": false,
+        "entries": [
+          {
+            "name": "Participant_A",
+            "userId": "user_a",
+            "memberType": 1,
+            "automatic": "included",
+            "reason": "단어포함",
+            "finalIncluded": true,
+            "comments": [
+              {
+                "body": "JOIN",
+                "type": "text",
+                "index": 1
+              }
+            ]
+          },
+          {
+            "name": "Participant_B",
+            "userId": "user_b",
+            "memberType": 1,
+            "automatic": "unclassified",
+            "reason": null,
+            "finalIncluded": false,
+            "comments": [
+              {
+                "body": "other",
+                "type": "text",
+                "index": 1
+              }
+            ]
+          }
+        ]
+      },
+      "trace": [
+        {
+          "participantCount": 2,
+          "hasAuthorHash": false,
+          "entries": [
+            {
+              "name": "Participant_A",
+              "userId": "user_a",
+              "memberType": 1,
+              "automatic": "included",
+              "reason": "단어포함",
+              "finalIncluded": true,
+              "comments": [
+                {
+                  "body": "JOIN",
+                  "type": "text",
+                  "index": 1
+                }
+              ]
+            },
+            {
+              "name": "Participant_B",
+              "userId": "user_b",
+              "memberType": 1,
+              "automatic": "unclassified",
+              "reason": null,
+              "finalIncluded": true,
+              "comments": [
+                {
+                  "body": "other",
+                  "type": "text",
+                  "index": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "participantCount": 2,
+          "hasAuthorHash": false,
+          "entries": [
+            {
+              "name": "Participant_A",
+              "userId": "user_a",
+              "memberType": 1,
+              "automatic": "included",
+              "reason": "단어포함",
+              "finalIncluded": true,
+              "comments": [
+                {
+                  "body": "JOIN",
+                  "type": "text",
+                  "index": 1
+                }
+              ]
+            },
+            {
+              "name": "Participant_B",
+              "userId": "user_b",
+              "memberType": 1,
+              "automatic": "unclassified",
+              "reason": null,
+              "finalIncluded": false,
+              "comments": [
+                {
+                  "body": "other",
+                  "type": "text",
+                  "index": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "author-hash-reset-by-load-sequence",
+      "comments": [
+        {
+          "user": {
+            "name": "Participant_A",
+            "userId": "user_a",
+            "ip": "",
+            "memberIcon": 1
+          },
+          "body": "fixture",
+          "type": "text",
+          "time": "2026-10-06T03:30:00Z",
+          "index": 1
+        }
+      ],
+      "authorBeforeParse": {
+        "name": "Participant_A",
+        "userId": "user_a",
+        "ip": "",
+        "memberIcon": 1
+      },
+      "question": "Q02",
+      "decision": "D03",
+      "observed": {
+        "participantCount": 1,
+        "hasAuthorHash": false,
+        "entries": [
+          {
+            "name": "Participant_A",
+            "userId": "user_a",
+            "memberType": 1,
+            "automatic": "unclassified",
+            "reason": null,
+            "finalIncluded": true,
+            "comments": [
+              {
+                "body": "fixture",
+                "type": "text",
+                "index": 1
+              }
+            ]
+          }
+        ]
+      },
+      "trace": [
+        {
+          "participantCount": 1,
+          "hasAuthorHash": false,
+          "entries": [
+            {
+              "name": "Participant_A",
+              "userId": "user_a",
+              "memberType": 1,
+              "automatic": "unclassified",
+              "reason": null,
+              "finalIncluded": true,
+              "comments": [
+                {
+                  "body": "fixture",
+                  "type": "text",
+                  "index": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "unsupported-comment-not-participant",
+      "comments": [
+        {
+          "user": {
+            "name": "Participant_A",
+            "userId": "user_a",
+            "ip": "",
+            "memberIcon": 1
+          },
+          "body": "unsupported",
+          "type": "unsupported",
+          "time": "2026-10-06T03:30:00Z",
+          "index": 1
+        }
+      ],
+      "observed": {
+        "participantCount": 0,
+        "hasAuthorHash": false,
+        "entries": []
+      },
+      "trace": [
+        {
+          "participantCount": 0,
+          "hasAuthorHash": false,
+          "entries": []
+        }
+      ]
+    },
+    {
+      "id": "client-voice-placeholder",
+      "comments": [
+        {
+          "user": {
+            "name": "Participant_A",
+            "userId": "user_a",
+            "ip": "",
+            "memberIcon": 1
+          },
+          "body": "<iframe src=\"https://example.invalid/voice/sample\">",
+          "type": "text",
+          "time": "2026-10-06T03:30:00Z",
+          "index": 1
+        }
+      ],
+      "liveWireObserved": false,
+      "observed": {
+        "participantCount": 1,
+        "hasAuthorHash": false,
+        "entries": [
+          {
+            "name": "Participant_A",
+            "userId": "user_a",
+            "memberType": 1,
+            "automatic": "unclassified",
+            "reason": null,
+            "finalIncluded": true,
+            "comments": [
+              {
+                "body": "[보플]",
+                "type": "text",
+                "index": 1
+              }
+            ]
+          }
+        ]
+      },
+      "trace": [
+        {
+          "participantCount": 1,
+          "hasAuthorHash": false,
+          "entries": [
+            {
+              "name": "Participant_A",
+              "userId": "user_a",
+              "memberType": 1,
+              "automatic": "unclassified",
+              "reason": null,
+              "finalIncluded": true,
+              "comments": [
+                {
+                  "body": "[보플]",
+                  "type": "text",
+                  "index": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "empty-comment-list",
+      "comments": [],
+      "observed": {
+        "participantCount": 0,
+        "hasAuthorHash": false,
+        "entries": []
+      },
+      "trace": [
+        {
+          "participantCount": 0,
+          "hasAuthorHash": false,
+          "entries": []
+        }
+      ]
+    }
+  ]
+}

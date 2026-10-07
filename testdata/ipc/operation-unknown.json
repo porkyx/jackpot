@@ -1,0 +1,15 @@
+{
+  "protocolVersion": 1,
+  "backendSessionId": "session-fixture",
+  "occurredAt": "2026-10-06T05:00:00Z",
+  "ok": true,
+  "data": {
+    "operationId": "missing-operation",
+    "state": "unknown",
+    "kind": null,
+    "collectionId": null,
+    "roundId": null,
+    "revision": null,
+    "failureCode": null
+  }
+}

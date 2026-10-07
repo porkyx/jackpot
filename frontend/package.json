@@ -1,0 +1,39 @@
+{
+  "name": "jackpot-frontend",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@12.9.1",
+  "engines": {
+    "node": "22.16.0"
+  },
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "tsc --noEmit && vite build",
+    "typecheck": "tsc --noEmit",
+    "lint": "node scripts/policy.mjs",
+    "test:policy": "node --test scripts/policy.test.mjs",
+    "test:mutation:policy": "node scripts/mutate-policy.mjs",
+    "test:mutation:schemas": "node scripts/mutate-schemas.mjs",
+    "test:coverage:contracts": "vitest run --coverage",
+    "test:coverage:services": "vitest run --config scripts/effect-services.vitest.config.ts --coverage",
+    "test:coverage:adapter": "vitest run --config scripts/wails-adapter.vitest.config.ts --coverage",
+    "test:mutation:services": "node scripts/mutate-effect-services.mjs",
+    "test": "vitest run --environment happy-dom",
+    "e2e": "playwright test"
+  },
+  "dependencies": {
+    "@wailsio/runtime": "3.0.0-beta.28",
+    "effect": "4.0.1"
+  },
+  "devDependencies": {
+    "@effect/vitest": "4.0.1",
+    "@playwright/test": "1.63.0",
+    "@types/node": "26.6.4",
+    "@vitest/coverage-v8": "5.0.3",
+    "happy-dom": "20.14.5",
+    "typescript": "7.0.2",
+    "vite": "8.3.3",
+    "vitest": "5.0.3"
+  }
+}

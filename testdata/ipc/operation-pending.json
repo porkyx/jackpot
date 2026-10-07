@@ -1,0 +1,15 @@
+{
+  "protocolVersion": 1,
+  "backendSessionId": "session-fixture",
+  "occurredAt": "2026-10-06T05:00:00Z",
+  "ok": true,
+  "data": {
+    "operationId": "operation-001",
+    "state": "pending",
+    "kind": "CreateCollection",
+    "collectionId": "collection-001",
+    "roundId": "round-001",
+    "revision": 1,
+    "failureCode": null
+  }
+}

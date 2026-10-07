@@ -1,0 +1,40 @@
+{
+  "total_cnt": 1,
+  "comment_cnt": 0,
+  "comments": [
+    {
+      "no": "1017",
+      "parent": "9002",
+      "user_id": "",
+      "name": "Participant_2",
+      "ip": "",
+      "reg_date": "10.06 12:00:00",
+      "nicktype": "00",
+      "t_ch1": "0",
+      "t_ch2": "0",
+      "vr_type": "",
+      "voice": null,
+      "rcnt": "0",
+      "c_no": 0,
+      "depth": 0,
+      "del_yn": "N",
+      "is_delete": "0",
+      "password_pop": "Y",
+      "copy_no": null,
+      "memo": "fixture comment 1",
+      "my_cmt": "N",
+      "del_btn": "Y",
+      "mod_btn": "N",
+      "a_my_cmt": "N",
+      "reply_w": "Y",
+      "chk_kfc": "N",
+      "gallog_icon": "<span>Participant_2</span>",
+      "vr_player": false,
+      "vr_player_tag": ""
+    }
+  ],
+  "pagination": "<em>1</em>",
+  "allow_reply": 1,
+  "comment_view_cnt": 1,
+  "nft": false
+}

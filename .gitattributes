@@ -1,0 +1,10 @@
+# Keep byte-compared generated contracts reproducible on Windows.
+frontend/bindings/** text eol=lf
+testdata/**/*.json text eol=lf
+frontend/pnpm-lock.yaml text eol=lf
+# Vite preserves HTML line endings; keep clean-checkout assets byte-identical.
+frontend/index.html text eol=lf
+frontend/native-smoke.html text eol=lf
+# Preserve upstream license bytes referenced by third-party SHA256 notices.
+third_party/licenses/** -text
+third_party/THIRD-PARTY-NOTICES.md text eol=lf
